@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [status, setStatus] = useState('idle'); // idle, sending, success, error
+  const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     user_name: '',
     user_email: '',
@@ -51,8 +52,11 @@ const Contact = () => {
         body: data,
       });
 
+      const result = await response.json();
+
       if (response.ok) {
         setStatus('success');
+        setErrorMessage('');
         setFormData({
           user_name: '',
           user_email: '',
@@ -61,15 +65,16 @@ const Contact = () => {
           message: '',
           file: null
         });
-        // Reset file input manually if needed
         const fileInput = document.querySelector('input[type="file"]');
         if (fileInput) fileInput.value = '';
       } else {
         setStatus('error');
+        setErrorMessage(result.details || result.error || 'Submission failed');
       }
     } catch (error) {
       console.error("Submission Error:", error);
       setStatus('error');
+      setErrorMessage(error.message || 'Network error');
     }
   };
 
@@ -236,6 +241,7 @@ const Contact = () => {
               {status === 'error' && (
                 <div className="text-red-500 text-center mt-4 text-xs space-y-1">
                   <p>Oops! Something went wrong.</p>
+                  <p className="font-bold text-[10px] uppercase tracking-wider">{errorMessage}</p>
                   <p className="opacity-70 text-[10px]">Note: Email delivery only works in production (e.g., Vercel) as local Vite doesn't run the API folder.</p>
                 </div>
               )}
