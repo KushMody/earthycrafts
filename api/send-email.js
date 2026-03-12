@@ -72,7 +72,7 @@ export default async function handler(req, res) {
       `;
 
       await resend.emails.send({
-        from: "websiteinquiry@resend.dev",
+        from: "onboarding@resend.dev",
         to: "kushmody0710@gmail.com",
         subject: "EarthyCrafts Custom Order Request",
         html: htmlContent,
