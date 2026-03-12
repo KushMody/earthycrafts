@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from 'react'
-import bgImage from '../Images/Home Page/1-1.jpg'
-import logo from '../Images/Home Page/Logo-2-150x150.png'
+const bgImage = '/Images/Home Page/1-1.jpg'
+const logo = '/Images/Home Page/Logo-2-150x150.png'
 import { Link } from 'react-router-dom'
 
 const Contact = () => {
@@ -121,8 +121,8 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="w-full md:w-[35vw] h-full flex flex-col items-center justify-center p-5 md:p-4 lg:p-5 bg-[#0c0c0c] overflow-y-auto md:overflow-hidden font-['Forum',serif]">
-        <div className="w-full h-fit min-h-[100vh] border border-white/5 bg-white/[0.02] pt-12 pb-6 px-6 md:pt-16 md:pb-8 md:px-8 lg:pt-20 lg:pb-10 lg:px-10 rounded-[2rem] md:rounded-[2.5rem] backdrop-blur-sm shadow-2xl flex flex-col justify-start editorial-reveal" style={{ transitionDelay: '200ms' }}>
+      <div className="w-full md:w-[35vw] h-full flex flex-col items-center justify-center p-5 md:p-4 lg:p-6 bg-[#0c0c0c] overflow-y-auto font-['Forum',serif]">
+        <div className="w-full h-fit border border-white/5 bg-white/[0.02] py-10 px-6 md:py-12 md:px-8 lg:py-14 lg:px-10 rounded-[2rem] md:rounded-[2.5rem] backdrop-blur-sm shadow-2xl flex flex-col justify-center editorial-reveal" style={{ transitionDelay: '200ms' }}>
           <div className="text-center mb-6 md:mb-8 editorial-reveal" style={{ transitionDelay: '300ms' }}>
             <div className="flex items-center justify-center space-x-4 mb-4">
               <div className="h-[1px] w-12 bg-[#efe7d2]/40"></div>
@@ -198,12 +198,16 @@ const Contact = () => {
               <div className="relative">
                 <input
                   type="file"
+                  name="file"
                   accept=".pdf,.png,.jpg,.jpeg"
                   onChange={(e) => {
                     const file = e.target.files[0];
                     if (file && file.size > 10 * 1024 * 1024) {
                       alert("File size exceeds 10MB limit.");
                       e.target.value = "";
+                      setFormData(prev => ({ ...prev, file: null }));
+                    } else {
+                      handleChange(e);
                     }
                   }}
                   className="w-full bg-black/40 border border-white/10 rounded-lg py-3 px-4 text-[#efe7d2] font-['Forum',serif] cursor-pointer file:mr-4 file:py-1 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-['Forum',serif] file:bg-[#c29d59]/20 file:text-[#c29d59] hover:file:bg-[#c29d59]/30 transition-all text-sm"

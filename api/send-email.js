@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     try {
       const getValue = (val) => Array.isArray(val) ? val[0] : val;
-      
+
       const user_name = getValue(fields.user_name);
       const user_email = getValue(fields.user_email);
       const user_phone = getValue(fields.user_phone);
@@ -68,9 +68,9 @@ export default async function handler(req, res) {
       </div>`;
 
       const { data, error } = await resend.emails.send({
-        from: "onboarding@resend.dev",
+        from: "websiteinquiry@resend.dev",
         to: "kushmody0710@gmail.com",
-        subject: `EarthyCrafts Custom Order Request: ${user_name}`,
+        subject: `EarthyCrafts Website Inquiry Form`,
         html: htmlContent,
         attachments,
       });

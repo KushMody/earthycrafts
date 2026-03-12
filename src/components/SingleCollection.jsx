@@ -266,6 +266,7 @@ const SingleCollection = () => {
   const getImagePath = (imagePath) => {
     try {
       if (!imagePath) return '';
+      if (imagePath.startsWith('http') || imagePath.startsWith('/')) return imagePath;
       // In Vite, new URL(path, import.meta.url) works best with relative paths.
       const relativePath = imagePath.startsWith('./') ? `../${imagePath.substring(2)}` : imagePath;
       return new URL(relativePath, import.meta.url).href;

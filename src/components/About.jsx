@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import aboutVideo from '../videos/about-landscape.webm';
-import about1 from '../Images/About us/about-1.webp';
-import about2 from '../Images/About us/about-2.webp';
+const about1 = '/Images/About us/about-1.webp';
+const about2 = '/Images/About us/about-2.webp';
 
 const About = () => {
     const videoRef = useRef(null);

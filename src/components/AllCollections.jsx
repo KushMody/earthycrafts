@@ -81,7 +81,7 @@ const ProjectLinkAnimation = ({ href, text, subtitle, imageSrc, delay }) => {
   const getImagePath = (imagePath) => {
     try {
       if (!imagePath) return '';
-      if (imagePath.startsWith('http')) return imagePath;
+      if (imagePath.startsWith('http') || imagePath.startsWith('/')) return imagePath;
       const relativePath = imagePath.startsWith('./') ? `../${imagePath.substring(2)}` : imagePath;
       return new URL(relativePath, import.meta.url).href;
     } catch (error) {

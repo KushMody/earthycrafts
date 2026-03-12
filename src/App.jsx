@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import logo from './Images/Home Page/Logo-2-150x150.png'
-import heroBg1 from './Images/Home Page/4-1.jpg'
-import heroBg2 from './Images/Home Page/3-1.jpg'
-import productImg from './Images/Home Page/1-1.jpg'
-import aboutImg from './Images/Home Page/5-1.jpg'
-import contactImg from './Images/Home Page/2-1.jpg'
-import video1 from './Images/Home Page/Video_1.mp4'
-import video2 from './Images/Home Page/Video_2.mp4'
-import video3 from './Images/Home Page/Video_3.mp4'
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+const logo = '/Images/Home Page/Logo-2-150x150.png'
+const heroBg1 = '/Images/Home Page/4-1.jpg'
+const heroBg2 = '/Images/Home Page/3-1.jpg'
+const productImg = '/Images/Home Page/1-1.jpg'
+const aboutImg = '/Images/Home Page/5-1.jpg'
+const contactImg = '/Images/Home Page/2-1.jpg'
+const video1 = '/Images/Home Page/Video_1.mp4'
+const video2 = '/Images/Home Page/Video_2.mp4'
+const video3 = '/Images/Home Page/Video_3.mp4'
 import Collections from './components/Collections'
 import Contact from './components/Contact'
 import About from './components/About'
@@ -293,7 +293,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   return (
-    <Router>
+    <BrowserRouter>
       <div className="min-h-screen md:h-screen w-screen bg-[#0c0c0c] flex flex-col md:flex-row p-2 pt-0 md:pt-0 overflow-x-hidden md:overflow-hidden">
         <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
@@ -340,7 +340,7 @@ function App() {
           } />
         </Routes>
       </div>
-    </Router>
+    </BrowserRouter>
   )
 }
 
