@@ -79,7 +79,7 @@ const Contact = () => {
   };
 
   return (
-    <div className={`w-full h-full md:h-full bg-[#0c0c0c] flex flex-col md:flex-row overflow-y-auto md:overflow-hidden rounded-[2rem] md:rounded-[2.5rem] p-2 md:p-0 font-['Forum',serif] animate-fade-in ${isVisible ? 'is-visible' : ''}`}>
+    <div className={`w-full h-full bg-[#0c0c0c] flex flex-col md:flex-row overflow-hidden font-['Forum',serif] ${isVisible ? 'is-visible' : ''}`}>
       <style>{`
         .editorial-reveal {
           opacity: 0;
@@ -94,24 +94,24 @@ const Contact = () => {
         }
       `}</style>
       {/* Left Side - Image with Text */}
-      <div className="relative w-full md:w-[65vw] h-[50vh] md:h-full overflow-hidden rounded-[2rem] md:rounded-[2.5rem] group">
+      <div className="relative w-full md:w-[60vw] lg:w-[65vw] h-[40vh] md:h-full overflow-hidden group">
         <img
           src={bgImage}
           alt="Contact Background"
           className="w-full h-full object-cover contrast-110 transition-transform duration-1000 group-hover:scale-105"
         />
-
+        
         {/* Subtle Overlay for Visibility */}
-        <div className="absolute inset-0 bg-black/30 z-10 transition-opacity duration-500"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/40 z-10"></div>
-        <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-end p-8 md:p-16">
-          <div className="flex flex-col items-start text-left space-y-8 md:space-y-12">
+        <div className="absolute inset-0 bg-black/40 z-10 transition-opacity duration-500"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/50 z-10"></div>
+        <div className="absolute inset-0 z-20 pointer-events-none flex flex-col justify-end p-8 md:p-14 lg:p-20">
+          <div className="flex flex-col items-start text-left space-y-6 md:space-y-10">
             <div>
               <div className="flex items-center space-x-4 mb-4 editorial-reveal" style={{ transitionDelay: '100ms' }}>
-                <span className="text-[#c29d59] tracking-[0.4em] text-[10px] md:text-sm uppercase font-light">Timeless by Design</span>
+                <span className="text-[#c29d59] tracking-[0.4em] text-[10px] md:text-xs uppercase font-light">Timeless by Design</span>
                 <div className="h-[1px] w-12 bg-[#c29d59]/40"></div>
               </div>
-              <h1 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(2.5rem,6vw,4.5rem)] md:text-[clamp(3.5rem,7vw,7rem)] leading-[0.85] font-normal tracking-[-0.02em] uppercase drop-shadow-2xl editorial-reveal" style={{ transitionDelay: '300ms' }}>
+              <h1 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(2rem,5vw,3.5rem)] md:text-[clamp(3rem,6vw,5.5rem)] lg:text-[clamp(3.5rem,7vw,7.5rem)] leading-[0.85] font-normal tracking-[-0.02em] uppercase drop-shadow-2xl editorial-reveal" style={{ transitionDelay: '300ms' }}>
                 PLACE YOUR<br />
                 <span className="text-[#c29d59]">CUSTOM<br />
                   ORDER</span>
@@ -121,9 +121,10 @@ const Contact = () => {
         </div>
       </div>
 
-      <div className="w-full md:w-[35vw] h-full flex flex-col items-center justify-center p-5 md:p-4 lg:p-6 bg-[#0c0c0c] overflow-y-auto font-['Forum',serif]">
-        <div className="w-full h-fit border border-white/5 bg-white/[0.02] py-10 px-6 md:py-12 md:px-8 lg:py-14 lg:px-10 rounded-[2rem] md:rounded-[2.5rem] backdrop-blur-sm shadow-2xl flex flex-col justify-center editorial-reveal" style={{ transitionDelay: '200ms' }}>
-          <div className="text-center mb-6 md:mb-8 editorial-reveal" style={{ transitionDelay: '300ms' }}>
+      {/* Right Side - Form */}
+      <div className="w-full md:w-[40vw] lg:w-[35vw] h-[60vh] md:h-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-10 bg-[#0c0c0c] overflow-y-auto custom-scrollbar font-['Forum',serif]">
+        <div className="w-full max-w-xl editorial-reveal" style={{ transitionDelay: '200ms' }}>
+          <div className="text-center mb-8 editorial-reveal" style={{ transitionDelay: '300ms' }}>
             <div className="flex items-center justify-center space-x-4 mb-4">
               <div className="h-[1px] w-12 bg-[#efe7d2]/40"></div>
               <h2 className="text-[#efe7d2] font-['Forum',serif] text-2xl md:text-3xl tracking-[0.2em] uppercase font-normal">

@@ -141,7 +141,7 @@ const About = () => {
 
             {/* Premium Editorial Modal */}
             {activeModal && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#080808]/98 backdrop-blur-3xl animate-fade-in">
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#080808]/98 backdrop-blur-3xl">
                     <button
                         onClick={() => setActiveModal(null)}
                         className="absolute top-12 right-12 z-20 text-[#c29d59] hover:text-white hover:cursor-pointer transition-colors duration-300 p-4 group"
