@@ -152,15 +152,17 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
       }}
       style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0, 0, 0, 0.98)', backdropFilter: 'blur(20px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', opacity: 1, transition: 'opacity 0.5s ease' }}
     >
-      <button
-        className="close-btn"
-        onClick={onClose}
-        style={{ position: 'absolute', top: '2rem', right: '2rem', background: '#3d291b', border: 'none', color: '#f1dfb7', cursor: 'pointer', zIndex: 1010, borderRadius: '50%', width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-      >
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ transition: 'transform 0.3s ease' }}>
-          <path d="M18 6L6 18M6 6l12 12" />
-        </svg>
-      </button>
+      {window.innerWidth > 768 && (
+        <button
+          className="close-btn"
+          onClick={onClose}
+          style={{ position: 'absolute', top: '2rem', right: '2rem', background: '#3d291b', border: 'none', color: '#f1dfb7', cursor: 'pointer', zIndex: 1010, borderRadius: '50%', width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ transition: 'transform 0.3s ease' }}>
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      )}
 
       <div
         className="lightbox-content"
