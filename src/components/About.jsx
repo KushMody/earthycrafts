@@ -169,7 +169,7 @@ const About = () => {
                     className={`fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-8 transition-all duration-300 ease-out ${isModalAnimating ? 'bg-[#080808]/95 backdrop-blur-lg opacity-100' : 'bg-[#080808]/0 backdrop-blur-0 opacity-0'}`}
                     onClick={(e) => { if (e.target === e.currentTarget) handleCloseModal(); }}
                 >
-                    <div className={`relative w-full max-w-md md:max-w-3xl rounded-3xl border border-[#e8d8a3]/20 bg-[#121212] p-4 md:p-8 shadow-[0_20px_70px_rgba(0,0,0,0.8)] transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${isModalAnimating ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-10 scale-95 opacity-0'}`}>
+                    <div className={`relative w-[82vw] max-w-md md:max-w-3xl min-h-[70vh] md:min-h-0 flex flex-col justify-center rounded-3xl border border-[#e8d8a3]/20 bg-[#121212] p-8 md:p-10 shadow-[0_20px_70px_rgba(0,0,0,0.8)] transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${isModalAnimating ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-10 scale-95 opacity-0'}`}>
                         <button
                             onClick={handleCloseModal}
                             className="absolute top-3 right-3 text-[#c29d59] hover:text-white transition-colors duration-200 p-2 rounded-full bg-white/10 hover:bg-white/20 text-lg md:text-xl cursor-pointer"

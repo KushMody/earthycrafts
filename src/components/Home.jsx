@@ -274,14 +274,14 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
       {/* 3. NARRATIVE */}
       <section className={`snap-section bg-[#0c0c0c] border-t border-white/5 ${activeSection === 2 ? 'section-visible' : ''}`}>
         <div className="grid md:grid-cols-2 h-full">
-          <div className="relative pt-24 p-6 md:p-32 flex flex-col justify-center">
+          <div className="relative pt-20 pb-4 md:pt-24 p-6 md:p-32 flex flex-col justify-center">
             <div className="relative z-10 editorial-reveal" style={{ transitionDelay: '200ms' }}>
-              <span className="text-[#c29d59] text-xs tracking-[0.5em] mb-8 block uppercase opacity-70">The Process</span>
-              <h2 className="text-3xl md:text-8xl font-['Forum',serif] uppercase leading-[0.9] mb-6 md:mb-10 flex flex-col items-start drop-shadow-xl">
+              <span className="text-[#c29d59] text-[10px] md:text-xs tracking-[0.5em] mb-4 md:mb-8 block uppercase opacity-70">The Process</span>
+              <h2 className="text-4xl md:text-8xl font-['Forum',serif] uppercase leading-[0.9] mb-4 md:mb-10 flex flex-col items-start drop-shadow-xl">
                 <span>From <span className="text-[#c29d59]">Dust</span></span>
                 <span>To Eternal</span>
               </h2>
-              <p className="text-[#efe7d2]/60 text-lg md:text-xl font-['Forum',serif] leading-relaxed max-w-xl mb-10 md:mb-16 italic">
+              <p className="text-[#efe7d2]/60 text-base md:text-xl font-['Forum',serif] leading-relaxed max-w-xl mb-6 md:mb-16 italic">
                 "We don't just carve stone; we release the spirit within."
               </p>
               <Link to="/about-us" className="inline-flex items-center space-x-8 group">
@@ -290,7 +290,7 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
               </Link>
             </div>
           </div>
-          <div className="relative overflow-hidden group min-h-[35vh] md:min-h-0">
+          <div className="relative overflow-hidden group min-h-[30vh] md:min-h-0">
             <img ref={maskImgRef} src={aboutImg} alt="Craft" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-1000" style={{ clipPath: 'inset(40% 0 40% 0)' }} />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
             <div ref={statsRef} className="absolute bottom-10 left-6 md:bottom-16 md:left-16 editorial-reveal opacity-0">

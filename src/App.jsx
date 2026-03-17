@@ -18,13 +18,13 @@ function App() {
 
         <Routes>
           <Route path="/" element={
-            <div className="w-full h-full relative overflow-y-auto">
+            <div className="w-full h-full relative">
               <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
               <Home isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
             </div>
           } />
           <Route path="/our-story" element={
-            <div className="w-full h-full relative overflow-y-auto">
+            <div className="w-full h-full relative">
               <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
               <Home isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
             </div>
