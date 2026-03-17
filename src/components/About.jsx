@@ -6,6 +6,7 @@ const about2 = '/Images/About us/about-2.webp';
 const About = () => {
     const videoRef = useRef(null);
     const [activeModal, setActiveModal] = useState(null);
+    const [isModalAnimating, setIsModalAnimating] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
     const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -43,6 +44,17 @@ const About = () => {
             quote: '"Resonating through every stone."'
         }
     };
+
+    const handleOpenModal = (type) => {
+        setActiveModal(type);
+        setTimeout(() => setIsModalAnimating(true), 10);
+    };
+
+    const handleCloseModal = () => {
+        setIsModalAnimating(false);
+        setTimeout(() => setActiveModal(null), 300);
+    };
+
 
     const VerticalMetric = ({ label, value, delay }) => (
         <div
@@ -95,8 +107,20 @@ const About = () => {
                         loop
                         playsInline
                         onLoadedMetadata={(e) => e.target.playbackRate = 0.75}
-                        className="absolute inset-0 w-full h-full object-cover brightness-[0.6] transition-transform duration-[20s] ease-linear group-hover:scale-105"
+                        className="absolute inset-0 w-full h-full object-cover brightness-[0.7] transition-transform duration-[20s] ease-linear group-hover:scale-105"
                     />
+
+                    {/* Cinematic Overlays */}
+                    <div className="absolute inset-0 z-10">
+                        {/* Overall darkening for general legibility - reduced */}
+                        <div className="absolute inset-0 bg-[#080808]/25"></div>
+                        
+                        {/* Radial center overlay to focus on text - lightened */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(8,8,8,0.1)_0%,rgba(8,8,8,0.4)_100%)]"></div>
+                        
+                        {/* Linear bottom-to-top gradient to ground the buttons - softer */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/70 via-transparent to-[#080808]/20"></div>
+                    </div>
 
                     {/* Editorial Header (Centered) */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center z-20">
@@ -108,7 +132,7 @@ const About = () => {
                         </div>
 
                         {/* Main Title */}
-                        <h2 className="text-[#efe7d2] font-['Forum',serif] text-5xl md:text-[8vw] lg:text-[10vw] leading-[0.85] tracking-[-0.02em] uppercase drop-shadow-lg text-center editorial-reveal" style={{ transitionDelay: '300ms' }}>
+                        <h2 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(3.5rem,15vw,6rem)] leading-[0.85] tracking-[-0.02em] uppercase drop-shadow-lg text-center editorial-reveal" style={{ transitionDelay: '300ms' }}>
                             CRAFTING<br />
                             <span className="text-[#c29d59]/90 inline-block mt-2">SILENCE</span>
                         </h2>
@@ -120,14 +144,14 @@ const About = () => {
                             {/* Hero Buttons */}
                             <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 mt-8">
                                 <button
-                                    onClick={() => setActiveModal('who')}
+                                    onClick={() => handleOpenModal('who')}
                                     className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-1 hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-2 transition-all duration-200"
                                 >
                                     WHO ARE WE?
                                 </button>
 
                                 <button
-                                    onClick={() => setActiveModal('story')}
+                                    onClick={() => handleOpenModal('story')}
                                     className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-[4px] hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-[8px] transition-all duration-200"
                                 >
                                     OUR MISSION
@@ -141,10 +165,13 @@ const About = () => {
 
             {/* Premium Editorial Modal */}
             {activeModal && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-8 bg-[#080808]/95 backdrop-blur-lg">
-                    <div className="relative w-full max-w-md md:max-w-3xl rounded-3xl border border-[#e8d8a3]/20 bg-[#121212] p-4 md:p-8 shadow-[0_20px_70px_rgba(0,0,0,0.8)]">
+                <div 
+                    className={`fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-8 transition-all duration-300 ease-out ${isModalAnimating ? 'bg-[#080808]/95 backdrop-blur-lg opacity-100' : 'bg-[#080808]/0 backdrop-blur-0 opacity-0'}`}
+                    onClick={(e) => { if (e.target === e.currentTarget) handleCloseModal(); }}
+                >
+                    <div className={`relative w-full max-w-md md:max-w-3xl rounded-3xl border border-[#e8d8a3]/20 bg-[#121212] p-4 md:p-8 shadow-[0_20px_70px_rgba(0,0,0,0.8)] transition-all duration-500 cubic-bezier(0.16, 1, 0.3, 1) ${isModalAnimating ? 'translate-y-0 scale-100 opacity-100' : 'translate-y-10 scale-95 opacity-0'}`}>
                         <button
-                            onClick={() => setActiveModal(null)}
+                            onClick={handleCloseModal}
                             className="absolute top-3 right-3 text-[#c29d59] hover:text-white transition-colors duration-200 p-2 rounded-full bg-white/10 hover:bg-white/20 text-lg md:text-xl cursor-pointer"
                             aria-label="Close modal"
                         >
@@ -159,7 +186,7 @@ const About = () => {
                             </div>
 
                             <div className="border-t border-white/10 pt-4">
-                                <p className="text-[#efe7d2] text-base md:text-lg leading-relaxed first-letter:text-4xl first-letter:text-[#c29d59] first-letter:font-semibold first-letter:mr-2">{modalContent[activeModal].content}</p>
+                                <p className="text-[#efe7d2] text-base md:text-lg leading-relaxed">{modalContent[activeModal].content}</p>
                                 <p className="mt-4 text-[#e8d8a4] text-xl md:text-2xl italic font-semibold leading-snug">{modalContent[activeModal].quote}</p>
                             </div>
                         </div>

@@ -380,7 +380,7 @@ const AllCollections = () => {
       </div>
 
       {/* Content Layer (Top of Background) */}
-      <div className="absolute inset-0 z-20 flex flex-col overflow-y-auto pt-22 md:pt-26">
+      <div className="absolute inset-0 z-20 flex flex-col max-md:overflow-y-auto md:overflow-hidden pt-22 md:pt-26">
         {/* Condensed Premium Header */}
         <div className="max-w-[1400px] mx-auto w-full px-8 md:px-[60px] mb-6 md:mb-8 flex-shrink-0">
           <div className="flex flex-col items-center text-center space-y-3 editorial-reveal" style={{ transitionDelay: '200ms' }}>
