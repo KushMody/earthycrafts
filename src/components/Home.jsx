@@ -13,10 +13,15 @@ const video3 = '/Images/Home Page/Video_3.mp4'
 
 import { Navbar } from './Navbar';
 
-const DotNavigation = ({ activeSection, onDotClick }) => {
+const DotNavigation = ({ activeSection, onDotClick, isHidden }) => {
   const sections = ['Hero', 'Gallery', 'Process', 'Invitation'];
   return (
-    <div className="dot-nav">
+    <div
+      className={`dot-nav z-[40] transition-opacity duration-200 ease-in-out ${isHidden
+        ? 'opacity-0 pointer-events-none'
+        : 'opacity-100'
+        }`}
+    >
       {sections.map((_, index) => (
         <div
           key={index}
@@ -33,7 +38,8 @@ const GalleryCard = ({ img, video, title, label, to, className, style }) => {
   return (
     <Link
       to={to}
-      className={`gallery-card-premium relative group overflow-hidden rounded-[2rem] cursor-pointer block ${className || ''}`}
+      // Reduced border radius slightly for mobile
+      className={`gallery-card-premium relative group overflow-hidden rounded-[1.25rem] md:rounded-[2rem] cursor-pointer block ${className || ''}`}
       style={style}
       onMouseEnter={() => videoRef.current?.play()}
       onMouseLeave={() => {
@@ -47,23 +53,26 @@ const GalleryCard = ({ img, video, title, label, to, className, style }) => {
       {/* Layered Overlays for Depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
 
-      <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between z-20">
+      {/* Reduced padding to p-4 on mobile for shorter cards */}
+      <div className="absolute inset-0 p-3 md:p-8 flex flex-col justify-between z-20">
         {/* Top Section */}
-        <h3 className="text-[#efe7d2] font-['Forum',serif] text-2xl md:text-3xl lg:text-4xl uppercase leading-[1.1] tracking-tight transition-colors duration-500 group-hover:text-white">
+        {/* Scaled title down to text-base for mobile, text-2xl for desktop */}
+        <h3 className="text-[#efe7d2] font-['Forum',serif] text-base md:text-2xl lg:text-3xl uppercase leading-[1.1] tracking-tight transition-colors duration-500 group-hover:text-white">
           {title}
         </h3>
 
         {/* Bottom Section */}
         <div className="flex items-end justify-between w-full">
-          <span className="text-[#efe7d2]/70 text-[10px] md:text-xs tracking-[0.3em] font-['Plus_Jakarta_Sans',sans-serif] uppercase group-hover:text-[#c29d59] transition-colors duration-500">
+          <span className="text-[#efe7d2]/70 text-[8px] md:text-xs tracking-[0.2em] md:tracking-[0.3em] font-['Plus_Jakarta_Sans',sans-serif] uppercase group-hover:text-[#c29d59] transition-colors duration-500 mb-1 md:mb-0">
             SEE MORE —
           </span>
         </div>
       </div>
 
       {/* Signature Black Tab */}
-      <div className="absolute bottom-0 right-0 bg-[#0c0c0c] px-6 py-4 rounded-tl-[2rem] z-30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
-        <span className="text-white text-[10px] md:text-[11px] tracking-[0.2em] font-['Plus_Jakarta_Sans',sans-serif] uppercase whitespace-nowrap">
+      {/* Shrunk the black tab and text slightly on mobile */}
+      <div className="absolute bottom-0 right-0 bg-[#0c0c0c] px-4 py-3 md:px-6 md:py-4 rounded-tl-[1.25rem] md:rounded-tl-[2rem] z-30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
+        <span className="text-white text-[9px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] font-['Plus_Jakarta_Sans',sans-serif] uppercase whitespace-nowrap">
           {label} —
         </span>
       </div>
@@ -81,8 +90,22 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
   const invitationImgRef = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
 
+  const [showDots, setShowDots] = useState(!isMenuOpen)
+
   useEffect(() => {
-    const timer = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroImages.length), 5000)
+    let timer;
+    if (isMenuOpen) {
+      setShowDots(false);
+    } else {
+      timer = setTimeout(() => {
+        setShowDots(true);
+      }, 0);
+    }
+    return () => clearTimeout(timer);
+  }, [isMenuOpen]);
+
+  useEffect(() => {
+    const timer = setInterval(() => setCurrentSlide((prev) => (prev + 1) % heroImages.length), 2000)
     const visTimer = setTimeout(() => setIsVisible(true), 300)
 
     const handleScroll = () => {
@@ -132,7 +155,12 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
 
   return (
     <div className="snap-container" ref={containerRef}>
-      <DotNavigation activeSection={activeSection} onDotClick={scrollToSection} />
+
+      <DotNavigation
+        activeSection={activeSection}
+        onDotClick={scrollToSection}
+        isHidden={!showDots}
+      />
 
       {/* 1. HERO */}
       <section className={`snap-section flex flex-col justify-center ${(activeSection === 0 && isVisible) ? 'section-visible' : ''}`}>
@@ -149,8 +177,6 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0c0c0c]"></div>
         </div>
 
-        <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
-
         <div className="relative z-10 text-center px-6 mt-20 editorial-reveal" style={{ transitionDelay: '200ms' }}>
           <span className="text-[#c29d59] font-['Forum',serif] text-sm tracking-[0.8em] uppercase mb-8 block opacity-80">Jaipur's Fine Artisans</span>
           <h1 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(4rem,14vw,12rem)] leading-[0.8] tracking-tighter uppercase mb-6 flex flex-col items-center">
@@ -162,52 +188,80 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
       </section>
 
       {/* 2. GALLERY */}
-      <section className={`snap-section bg-[#0c0c0c] flex flex-col justify-center items-center py-10 ${activeSection === 1 ? 'section-visible' : ''}`}>
-        <div className="w-full max-w-[1400px] flex flex-col items-center relative z-10">
-          <div className="text-center mb-8 md:mb-12 w-full px-6 editorial-reveal" style={{ transitionDelay: '200ms' }}>
-            <div className="flex items-center justify-center space-x-6 mb-8">
-              <div className="h-[1px] w-12 bg-[#c29d59]/30"></div>
-              <span className="text-[#c29d59] tracking-[0.6em] font-['Forum',serif] text-xs uppercase opacity-80">Our Curation</span>
-              <div className="h-[1px] w-12 bg-[#c29d59]/30"></div>
+      {/* ADDED: justify-center to center vertically, and removed the asymmetrical pt-20/pb-6 padding */}
+      <section className={`snap-section bg-[#0c0c0c] flex flex-col justify-center items-center py-4 md:py-10 overflow-hidden ${activeSection === 1 ? 'section-visible' : ''}`}>
+
+        {/* ADDED: justify-center here as well so the inner flexbox perfectly centers the text and cards */}
+        <div className="w-full max-w-[1400px] flex flex-col justify-center relative z-10 h-full px-4 md:px-0 mt-8 md:mt-15">
+
+          <div className="flex-none text-center mb-4 md:mb-5 w-full editorial-reveal" style={{ transitionDelay: '200ms' }}>
+            <div className="flex items-center justify-center space-x-4 md:space-x-6 mb-1 md:mb-5">
+              <div className="h-[1px] w-8 md:w-12 bg-[#c29d59]/30"></div>
+              <span className="text-[#c29d59] tracking-[0.4em] md:tracking-[0.6em] font-['Forum',serif] text-[10px] md:text-xs uppercase opacity-80">Our Curation</span>
+              <div className="h-[1px] w-8 md:w-12 bg-[#c29d59]/30"></div>
             </div>
-            <h2 className="text-[#efe7d2] font-['Forum',serif] text-4xl md:text-7xl lg:text-8xl tracking-tight uppercase leading-[0.8] flex flex-col items-center drop-shadow-2xl">
+            <h2 className="text-[#efe7d2] font-['Forum',serif] text-4xl md:text-5xl lg:text-5xl tracking-tight uppercase leading-[0.9] md:leading-[0.8] flex flex-col items-center drop-shadow-2xl">
               <span>Timeless</span>
               <span>Stone Artistry</span>
             </h2>
-            <p className="text-[#efe7d2]/40 font-['Forum',serif] text-sm md:text-lg max-w-lg mx-auto mt-8 italic">
+            <p className="text-[#efe7d2]/40 font-['Forum',serif] text-sm md:text-lg max-w-lg mx-auto mt-2 md:mt-4 italic hidden md:block">
               "Every piece is hand-carved to perfection, preserving the heritage of master craftsmen."
             </p>
           </div>
 
-          <div className="horizontal-content w-full flex flex-row items-center justify-center gap-6 md:gap-8 overflow-visible">
+          {/* Cards Wrapper */}
+          <div className="w-full max-w-[85%] md:max-w-none mx-auto flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 pb-6 md:pb-0">
+
+            {/* Card 1 */}
             <GalleryCard
               img={productImg}
               video={video1}
               title="ALL PRODUCTS"
               label="PRODUCTS"
               to="/categories"
-              className="editorial-reveal"
+              className="editorial-reveal 
+    w-full 
+    h-[25vh] min-h-[180px] max-h-[250px] 
+    md:h-[30vh] md:w-[18vw] 
+    lg:h-[28vh] lg:w-[14vw] 
+    flex-shrink-0"
               style={{ transitionDelay: '0.4s' }}
             />
+
+            {/* Card 2 */}
             <GalleryCard
               img={aboutImg}
               video={video2}
               title="LEARN ABOUT US"
               label="ABOUT US"
               to="/about-us"
-              className="editorial-reveal"
+              className="editorial-reveal 
+    w-full 
+    h-[25vh] min-h-[180px] max-h-[250px] 
+    md:h-[30vh] md:w-[18vw] 
+    lg:h-[28vh] lg:w-[14vw] 
+    flex-shrink-0"
               style={{ transitionDelay: '0.55s' }}
             />
+
+            {/* Card 3 */}
             <GalleryCard
               img={contactImg}
               video={video3}
               title="GET A QUOTE"
               label="CONTACT"
               to="/contact-us"
-              className="editorial-reveal"
+              className="editorial-reveal 
+    w-full 
+    h-[25vh] min-h-[180px] max-h-[250px] 
+    md:h-[30vh] md:w-[18vw] 
+    lg:h-[28vh] lg:w-[14vw] 
+    flex-shrink-0"
               style={{ transitionDelay: '0.7s' }}
             />
+
           </div>
+
         </div>
       </section>
 

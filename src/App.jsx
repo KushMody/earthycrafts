@@ -6,7 +6,6 @@ import About from './components/About'
 import AllCollections from './components/AllCollections'
 import SingleCollection from './components/SingleCollection'
 import Home from './components/Home'
-import Landing from './components/Landing'
 import { Navbar, MobileMenu } from './components/Navbar'
 
 function App() {
@@ -18,8 +17,18 @@ function App() {
         <MobileMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
         <Routes>
-          <Route path="/" element={<Landing isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />} />
-          <Route path="/our-story" element={<Home isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />} />
+          <Route path="/" element={
+            <div className="w-full h-full relative overflow-y-auto">
+              <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+              <Home isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+            </div>
+          } />
+          <Route path="/our-story" element={
+            <div className="w-full h-full relative overflow-y-auto">
+              <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+              <Home isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+            </div>
+          } />
           <Route path="/categories" element={
             <div className="w-full h-full relative overflow-y-hidden">
               <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />

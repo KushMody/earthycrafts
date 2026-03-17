@@ -121,7 +121,7 @@ const About = () => {
                             <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 mt-8">
                                 <button
                                     onClick={() => setActiveModal('who')}
-                                    className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-[4px] hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-[8px] transition-all duration-200"
+                                    className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-1 hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-2 transition-all duration-200"
                                 >
                                     WHO ARE WE?
                                 </button>
@@ -141,41 +141,26 @@ const About = () => {
 
             {/* Premium Editorial Modal */}
             {activeModal && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-[#080808]/98 backdrop-blur-3xl">
-                    <button
-                        onClick={() => setActiveModal(null)}
-                        className="absolute top-12 right-12 z-20 text-[#c29d59] hover:text-white hover:cursor-pointer transition-colors duration-300 p-4 group"
-                        aria-label="Close modal"
-                    >
-                        <div className="relative w-8 h-8 flex items-center justify-center">
-                            <div className="absolute w-8 h-[1px] bg-current rotate-45"></div>
-                            <div className="absolute w-8 h-[1px] bg-current -rotate-45"></div>
-                        </div>
-                    </button>
+                <div className="fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-8 bg-[#080808]/95 backdrop-blur-lg">
+                    <div className="relative w-full max-w-md md:max-w-3xl rounded-3xl border border-[#e8d8a3]/20 bg-[#121212] p-4 md:p-8 shadow-[0_20px_70px_rgba(0,0,0,0.8)]">
+                        <button
+                            onClick={() => setActiveModal(null)}
+                            className="absolute top-3 right-3 text-[#c29d59] hover:text-white transition-colors duration-200 p-2 rounded-full bg-white/10 hover:bg-white/20 text-lg md:text-xl cursor-pointer"
+                            aria-label="Close modal"
+                        >
+                            ✕
+                        </button>
 
-                    <div className="w-full max-w-6xl flex flex-col md:flex-row gap-20 animate-scale-up text-left">
-                        <div className="md:w-1/2 flex flex-col justify-center">
-                            <span className="text-[#c29d59] font-['Forum',serif] text-[11px] tracking-[0.8em] uppercase mb-10 block opacity-60">Narrative</span>
-                            <h2 className="text-[#efe7d2] font-['Forum',serif] text-6xl lg:text-9xl mb-12 leading-[0.8] tracking-tighter uppercase drop-shadow-sm">
-                                {modalContent[activeModal].title.split(' ').map((word, i) => (
-                                    <React.Fragment key={i}>{word}<br /></React.Fragment>
-                                ))}
-                            </h2>
-                        </div>
+                        <div className="space-y-4">
+                            <div>
+                                <p className="uppercase text-[#c29d59] tracking-[0.35em] text-[9px] md:text-xs font-semibold mb-2">Narrative</p>
+                                <h3 className="text-[#efe7d2] font-['Forum',serif] text-3xl md:text-5xl leading-[1.05] uppercase tracking-tight">{modalContent[activeModal].title}</h3>
+                                <p className="mt-3 text-[#f0e9d8] text-sm md:text-base leading-relaxed opacity-90">{modalContent[activeModal].subContent}</p>
+                            </div>
 
-                        <div className="md:w-1/2 flex flex-col justify-center border-l border-white/5 pl-20 py-10">
-                            <p className="text-[#efe7d2] font-['Forum',serif] text-2xl lg:text-3xl leading-relaxed mb-16 opacity-90 first-letter:text-6xl first-letter:text-[#c29d59] first-letter:mr-4">
-                                {modalContent[activeModal].content}
-                            </p>
-
-                            <div className="space-y-10 group">
-                                <div className="h-[1px] w-20 bg-[#c29d59] group-hover:w-full transition-all duration-[2s]"></div>
-                                <p className="text-[#efe7d2]/50 font-['Forum',serif] text-lg lg:text-xl leading-relaxed italic tracking-wide">
-                                    {modalContent[activeModal].subContent}
-                                </p>
-                                <div className="text-[#c29d59] font-['Forum',serif] text-3xl lg:text-4xl italic opacity-80 mt-12 text-right">
-                                    {modalContent[activeModal].quote}
-                                </div>
+                            <div className="border-t border-white/10 pt-4">
+                                <p className="text-[#efe7d2] text-base md:text-lg leading-relaxed first-letter:text-4xl first-letter:text-[#c29d59] first-letter:font-semibold first-letter:mr-2">{modalContent[activeModal].content}</p>
+                                <p className="mt-4 text-[#e8d8a4] text-xl md:text-2xl italic font-semibold leading-snug">{modalContent[activeModal].quote}</p>
                             </div>
                         </div>
                     </div>
