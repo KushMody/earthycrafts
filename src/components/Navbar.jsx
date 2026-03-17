@@ -7,7 +7,7 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
   const isLeftAligned = location.pathname === '/contact-us';
 
   return (
-    <nav className="absolute top-0 left-0 w-full pt-4 px-6 md:pt-0 md:pl-4 flex items-center justify-between z-60">
+    <nav className="absolute top-0 left-0 w-full pt-4 px-6 md:pt-0 md:pl-4 flex items-center justify-between z-[150]">
       <div className={`flex items-center ${isLeftAligned ? 'space-x-2' : 'w-full justify-between'}`}>
         <Link to="/" onClick={() => setIsMenuOpen(false)}>
           <img
@@ -28,7 +28,7 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
       {/* Hamburger for mobile */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="md:hidden text-white p-2 z-[50] border border-white/20 rounded-xl bg-black/20 backdrop-blur-sm transition-all active:scale-95"
+        className="md:hidden text-white p-2 z-[120] border border-white/20 rounded-xl bg-black/20 backdrop-blur-sm transition-all active:scale-95"
       >
         <div className="w-8 h-4 flex flex-col justify-between items-end">
           <span className={`h-[1.5px] bg-white transition-all duration-300 ${isMenuOpen ? 'w-full rotate-45 translate-y-[7.5px]' : 'w-full'}`}></span>
@@ -41,7 +41,7 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
 };
 
 export const MobileMenu = ({ isOpen, onClose }) => (
-  <div className={`fixed inset-0 bg-[#0c0c0c] z-[55] flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
+  <div className={`fixed inset-0 bg-[#0c0c0c] z-[140] flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
     {/* Close Button */}
     {/* <button
       onClick={onClose}
