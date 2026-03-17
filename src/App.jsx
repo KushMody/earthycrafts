@@ -30,7 +30,7 @@ function App() {
             </div>
           } />
           <Route path="/categories" element={
-            <div className="w-full h-full relative overflow-y-hidden">
+            <div className="w-full h-full relative max-md:overflow-y-auto md:overflow-y-hidden">
               <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
               <Collections />
             </div>
@@ -57,13 +57,13 @@ function App() {
             </div>
           } />
           <Route path="/contact-us" element={
-            <div className="w-full h-screen relative overflow-hidden">
+            <div className="w-full min-h-screen md:h-screen relative md:overflow-hidden">
               <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
               <Contact />
             </div>
           } />
           <Route path="/about-us" element={
-            <div className="w-full h-screen relative overflow-hidden">
+            <div className="w-full min-h-screen md:h-screen relative md:overflow-hidden">
               <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
               <About />
             </div>

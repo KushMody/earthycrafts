@@ -59,7 +59,7 @@ export const MobileMenu = ({ isOpen, onClose }) => (
       <Link to="/all-collections" className="text-white text-2xl tracking-[0.3em] font-['Forum',serif] uppercase hover:text-white/60 transition-colors" onClick={onClose}>All Collections</Link>
       <Link to="/about-us" className="text-white text-2xl tracking-[0.3em] font-['Forum',serif] uppercase hover:text-white/60 transition-colors" onClick={onClose}>About Us</Link>
       <Link to="/contact-us" className="text-white text-2xl tracking-[0.3em] font-['Forum',serif] uppercase hover:text-white/60 transition-colors" onClick={onClose}>Contact Us</Link>
-      <Link to="/" className="nav-button mt-3" onClick={onClose}>Custom Inquiry</Link>
+      <Link to="/contact-us" className="nav-button mt-3" onClick={onClose}>Custom Inquiry</Link>
     </div>
   </div>
 )
