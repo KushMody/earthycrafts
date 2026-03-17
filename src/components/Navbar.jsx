@@ -21,7 +21,7 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
           <Link to="/all-collections" className="px-1 py-1 border border-white/0 hover:border-white hover:bg-white/5 rounded-lg transition-all duration-300 whitespace-nowrap cursor-pointer">Collections</Link>
           <Link to="/about-us" className="px-1 py-1 border border-white/0 hover:border-white hover:bg-white/5 rounded-lg transition-all duration-300 whitespace-nowrap cursor-pointer">About Us</Link>
           <Link to="/contact-us" className="px-1 py-1 border border-white/0 hover:border-white hover:bg-white/5 rounded-lg transition-all duration-300 whitespace-nowrap cursor-pointer">Contact Us</Link>
-          <Link to="/" className="nav-premium-btn">Our Story</Link> 
+          <Link to="/contact-us" className="nav-premium-btn">Custom Inquiry</Link>
         </div>
       </div>
 
