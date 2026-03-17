@@ -35,6 +35,12 @@ const DotNavigation = ({ activeSection, onDotClick, isHidden }) => {
 
 const GalleryCard = ({ img, video, title, label, to, className, style }) => {
   const videoRef = useRef(null)
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1.5;
+    }
+  }, []);
+
   return (
     <Link
       to={to}
@@ -47,8 +53,8 @@ const GalleryCard = ({ img, video, title, label, to, className, style }) => {
         if (videoRef.current) videoRef.current.currentTime = 0;
       }}
     >
-      <img src={img} alt={title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
-      <video ref={videoRef} src={video} muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-1000 group-hover:scale-110" />
+      <img src={img} alt={title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000" />
+      <video ref={videoRef} src={video} muted loop playsInline className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 
       {/* Layered Overlays for Depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
@@ -71,7 +77,7 @@ const GalleryCard = ({ img, video, title, label, to, className, style }) => {
 
       {/* Signature Black Tab */}
       {/* Shrunk the black tab and text slightly on mobile */}
-      <div className="absolute bottom-0 right-0 bg-[#0c0c0c] px-4 py-3 md:px-6 md:py-4 rounded-tl-[1.25rem] md:rounded-tl-[2rem] z-30 transition-transform duration-500 group-hover:translate-x-1 group-hover:translate-y-1">
+      <div className="absolute bottom-0 right-0 bg-[#0c0c0c] px-4 py-3 md:px-6 md:py-4 rounded-tl-[1.25rem] md:rounded-tl-[2rem] z-30 transition-transform duration-500">
         <span className="text-white text-[9px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] font-['Plus_Jakarta_Sans',sans-serif] uppercase whitespace-nowrap">
           {label} —
         </span>
@@ -192,7 +198,7 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
       <section className={`snap-section bg-[#0c0c0c] flex flex-col justify-center items-center py-2 md:py-10 overflow-hidden ${activeSection === 1 ? 'section-visible' : ''}`}>
 
         {/* ADDED: justify-center here as well so the inner flexbox perfectly centers the text and cards */}
-        <div className="w-full max-w-[1400px] flex flex-col justify-center relative z-10 h-full px-4 md:px-0 mt-4 md:mt-15">
+        <div className="w-full max-w-[1400px] flex flex-col justify-center relative z-10 h-full px-4 md:px-0 mt-20 md:mt-15">
 
           <div className="flex-none text-center mb-4 md:mb-5 w-full editorial-reveal" style={{ transitionDelay: '200ms' }}>
             <div className="flex items-center justify-center space-x-4 md:space-x-6 mb-1 md:mb-5">
@@ -268,7 +274,7 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
       {/* 3. NARRATIVE */}
       <section className={`snap-section bg-[#0c0c0c] border-t border-white/5 ${activeSection === 2 ? 'section-visible' : ''}`}>
         <div className="grid md:grid-cols-2 h-full">
-          <div className="relative p-6 md:p-32 flex flex-col justify-center">
+          <div className="relative pt-24 p-6 md:p-32 flex flex-col justify-center">
             <div className="relative z-10 editorial-reveal" style={{ transitionDelay: '200ms' }}>
               <span className="text-[#c29d59] text-xs tracking-[0.5em] mb-8 block uppercase opacity-70">The Process</span>
               <h2 className="text-3xl md:text-8xl font-['Forum',serif] uppercase leading-[0.9] mb-6 md:mb-10 flex flex-col items-start drop-shadow-xl">
@@ -306,13 +312,13 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
         </div>
 
         <div className="relative z-10 text-center px-6 editorial-reveal" style={{ transitionDelay: '200ms' }}>
-          <span className="text-[#efe7d2]/60 font-['Forum',serif] text-sm tracking-[0.8em] uppercase mb-8 block">A Journey Awaits</span>
-          <h2 className="text-[#efe7d2] font-['Forum',serif] text-6xl md:text-[8rem] lg:text-[10rem] uppercase leading-[0.8] tracking-tighter mb-20 flex flex-col items-center">
+          <span className="text-[#efe7d2]/60 font-['Forum',serif] text-base md:text-sm tracking-[0.5em] md:tracking-[0.8em] uppercase mb-8 block">A Journey Awaits</span>
+          <h2 className="text-[#efe7d2] font-['Forum',serif] text-7xl md:text-[8rem] lg:text-[10rem] uppercase leading-[0.8] tracking-tighter mb-20 flex flex-col items-center">
             <span>Start Your</span>
             <span className="text-[#c29d59]">Gallery</span>
           </h2>
           <Link to="/contact-us" className="group flex flex-col items-center">
-            <span className="text-[#c29d59] text-[10px] md:text-xs tracking-[0.8em] mb-6 uppercase">Get A Custom Quote</span>
+            <span className="text-[#c29d59] text-xs md:text-xs tracking-[0.6em] md:tracking-[0.8em] mb-6 uppercase">Get A Custom Quote</span>
             <div className="w-16 md:w-32 h-[1px] bg-[#c29d59]/50 group-hover:bg-[#c29d59] group-hover:w-64 transition-all duration-1000"></div>
           </Link>
         </div>
