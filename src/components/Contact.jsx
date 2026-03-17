@@ -79,7 +79,7 @@ const Contact = () => {
   };
 
   return (
-    <div className={`w-full h-full max-sm:h-auto bg-[#0c0c0c] flex flex-col md:flex-row overflow-hidden max-sm:overflow-y-auto font-['Forum',serif] ${isVisible ? 'is-visible' : ''}`}>
+    <div className={`w-full min-h-screen md:h-screen bg-[#0c0c0c] flex flex-col md:flex-row md:overflow-hidden font-['Forum',serif] ${isVisible ? 'is-visible' : ''}`}>
       <style>{`
         .editorial-reveal {
           opacity: 0;
