@@ -159,8 +159,8 @@ const Collections = () => {
                                 onLoadedMetadata={(e) => e.target.playbackRate = 0.75}
                                 className="w-full h-full object-cover brightness-[0.35] bg-transition"
                             />
-                            {/* Solid Overlay for Readability - Increased Opacity */}
-                            <div className="absolute inset-0 bg-black/70 md:bg-black/40 backdrop-blur-[1px]"></div>
+                            {/* Solid Overlay for Readability - Increased Desktop/Mobile Opacity */}
+                            <div className="absolute inset-0 bg-black/75 md:bg-black/55 backdrop-blur-[1px]"></div>
                         </div>
 
                         {/* Decorative Space Number (Subtle Watermark Behind) */}

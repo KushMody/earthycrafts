@@ -2,6 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import productsData from '../data.json';
 
+const getImagePath = (imagePath) => {
+  try {
+    if (!imagePath) return '';
+    if (imagePath.startsWith('http') || imagePath.startsWith('/')) return imagePath;
+    const relativePath = imagePath.startsWith('./') ? `../${imagePath.substring(2)}` : imagePath;
+    return new URL(relativePath, import.meta.url).href;
+  } catch (error) {
+    return imagePath;
+  }
+};
+
 const ProjectLinkAnimation = ({ href, text, subtitle, imageSrc, delay }) => {
   const linkRef = useRef(null);
   const imageRef = useRef(null);
@@ -35,7 +46,7 @@ const ProjectLinkAnimation = ({ href, text, subtitle, imageSrc, delay }) => {
     state.currentY += (state.targetY - state.currentY) * posLerp;
     state.currentScale += (state.targetScale - state.currentScale) * scaleLerp;
     state.currentRotate += (state.targetRotate - state.currentRotate) * rotateLerp;
-    
+
     const targetOpacity = isHovering ? 1 : 0;
     state.currentOpacity += (targetOpacity - state.currentOpacity) * scaleLerp;
 
@@ -78,16 +89,7 @@ const ProjectLinkAnimation = ({ href, text, subtitle, imageSrc, delay }) => {
     }
   };
 
-  const getImagePath = (imagePath) => {
-    try {
-      if (!imagePath) return '';
-      if (imagePath.startsWith('http') || imagePath.startsWith('/')) return imagePath;
-      const relativePath = imagePath.startsWith('./') ? `../${imagePath.substring(2)}` : imagePath;
-      return new URL(relativePath, import.meta.url).href;
-    } catch (error) {
-      return imagePath;
-    }
-  };
+
 
   return (
     <Link
@@ -151,7 +153,7 @@ const ProjectLinkAnimation = ({ href, text, subtitle, imageSrc, delay }) => {
 const AllCollections = () => {
   const { category } = useParams();
   const [isPageVisible, setIsPageVisible] = useState(false);
-  
+
   const categoryIdToNameMap = {
     'home': 'INTERIOR SPACES',
     'outdoor': 'OUTDOOR LIVING',
@@ -162,12 +164,28 @@ const AllCollections = () => {
     return categoryIdToNameMap[category] || "OUR COLLECTIONS";
   };
 
+  const heroImages = [
+    '/Images/Home Page/4-1.jpg',
+    '/Images/Home Page/3-1.jpg',
+    '/Images/Home Page/1-1.jpg',
+    '/Images/Home Page/5-1.jpg',
+    '/Images/Home Page/2-1.jpg'
+  ];
+
   const [collections, setCollections] = useState([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [heroImages.length]);
 
   useEffect(() => {
     // Trigger entrance animation
     const timer = setTimeout(() => setIsPageVisible(true), 100);
-    
+
     if (productsData && productsData.products) {
       // Internal filtering names
       const internalFilterMap = {
@@ -175,17 +193,17 @@ const AllCollections = () => {
         'outdoor': 'Outdoor',
         'garden': 'Garden Landscape'
       };
-      
+
       const targetCategoryName = internalFilterMap[category];
-      
+
       const uniqueCollectionNames = [...new Set(productsData.products
         .filter(p => targetCategoryName ? p.categories.includes(targetCategoryName) : true)
         .map(p => p.collection)
       )];
 
       const dynamicCollections = uniqueCollectionNames.map(name => {
-        const featuredProduct = productsData.products.find(p => 
-          p.collection === name && 
+        const featuredProduct = productsData.products.find(p =>
+          p.collection === name &&
           (targetCategoryName ? p.categories.includes(targetCategoryName) : true)
         );
 
@@ -196,7 +214,7 @@ const AllCollections = () => {
           image: featuredProduct ? featuredProduct.image : ""
         };
       });
-      
+
       setCollections(dynamicCollections);
     }
 
@@ -204,8 +222,30 @@ const AllCollections = () => {
   }, [category]);
 
   return (
-    <div className={`w-full h-screen md:h-screen bg-[#0c0c0c] pt-36 md:pt-32 pb-8 overflow-y-auto md:overflow-hidden flex flex-col ${isPageVisible ? 'is-visible' : ''}`}>
+    <div className={`relative w-full h-screen bg-[#0c0c0c] overflow-hidden ${isPageVisible ? 'is-visible' : ''}`}>
       <style>{`
+        .bg-transition {
+          transform: scale(1.1);
+          opacity: 0;
+          transition: transform 4s cubic-bezier(0.16, 1, 0.3, 1), 
+                      opacity 2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .hero-visible {
+          transform: scale(1);
+          opacity: 1;
+        }
+
+        .hero-stacking {
+          z-index: 5;
+        }
+
+        .hero-prev {
+          opacity: 1;
+          transform: scale(1);
+          z-index: 1;
+        }
+
         .editorial-reveal {
             opacity: 0;
             filter: blur(15px);
@@ -230,7 +270,8 @@ const AllCollections = () => {
             column-gap: 3rem;
             row-gap: 0.5rem;
             flex: 1;
-            align-content: center;
+            align-content: start;
+            z-index: 20;
         }
 
         @media (max-width: 1024px) {
@@ -240,7 +281,7 @@ const AllCollections = () => {
         @media (max-width: 768px) {
             .pll-container { 
               grid-template-columns: 1fr;
-              padding: 20px 24px;
+              padding: 20px 40px;
               column-gap: 0;
               align-content: start;
             }
@@ -321,42 +362,63 @@ const AllCollections = () => {
         `).join('')}
       `}</style>
 
-      {/* Condensed Premium Header */}
-      <div className="max-w-[1400px] mx-auto px-[60px] mb-8 md:mb-12">
-        <div className="flex flex-col space-y-2 editorial-reveal" style={{ transitionDelay: '200ms' }}>
-          <div className="flex items-center space-x-3">
-             <div className="h-[1px] w-8 bg-[#c29d59] opacity-40"></div>
-             <span className="text-[#c29d59] font-['Forum',serif] text-[10px] tracking-[0.5em] uppercase opacity-70">Studio Catalog</span>
-          </div>
-          
-          <h1 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(1.5rem,4vw,3.5rem)] leading-none tracking-tight uppercase">
-            {getCategoryTitle()}
-          </h1>
-
-          <p className="text-[#efe7d2]/30 font-['Forum',serif] text-[12px] md:text-sm max-w-lg italic font-light tracking-wide">
-            Explore our curated selection of hand-crafted masterpieces.
-          </p>
-        </div>
-      </div>
-
-      <div className="pll-container">
-        {collections.map((item, index) => (
-          <ProjectLinkAnimation
-            key={item.id}
-            href={`/collection/${item.id}${category ? `?category=${category}` : ''}`}
-            text={item.text}
-            subtitle={item.subtitle}
-            imageSrc={item.image}
-            delay={300 + (index * 50)}
+      {/* Background Slideshow Layer */}
+      <div className="absolute inset-0 z-0">
+        {heroImages.map((img, index) => (
+          <img
+            key={index}
+            src={getImagePath(img)}
+            alt={`Background slide ${index + 1}`}
+            className={`absolute inset-0 w-full h-full object-cover brightness-[0.45] contrast-[1.1] scale-110 bg-transition 
+              ${index === currentSlide ? 'hero-visible hero-stacking' :
+                index === (currentSlide - 1 + heroImages.length) % heroImages.length ? 'hero-prev' : ''}`}
           />
         ))}
-        {collections.length === 0 && (
-          <div className="col-span-full text-center py-20 editorial-reveal" style={{ transitionDelay: '400ms' }}>
-            <p className="text-[#C5A059] font-['Forum',serif] text-xl opacity-60 italic">
-              No collections found for this category.
+        {/* Cinematic Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/85 via-transparent to-[#0c0c0c]/95 z-10"></div>
+        <div className="absolute inset-0 backdrop-blur-[1.5px] bg-black/30 z-10"></div>
+      </div>
+
+      {/* Content Layer (Top of Background) */}
+      <div className="relative z-20 flex flex-col h-full pt-22 md:pt-26">
+        {/* Condensed Premium Header */}
+        <div className="max-w-[1400px] mx-auto w-full px-10 md:px-[60px] mb-6 md:mb-8">
+          <div className="flex flex-col items-center text-center space-y-3 editorial-reveal" style={{ transitionDelay: '200ms' }}>
+            <div className="flex items-center justify-center">
+              <div className="h-[1px] w-8 bg-[#c29d59] opacity-60"></div>
+              <span className="text-[#c29d59] font-['Forum',serif] text-[10px] tracking-[0.5em] uppercase opacity-90">Studio Catalog</span>
+              <div className="h-[1px] w-8 bg-[#c29d59] opacity-60"></div>
+            </div>
+
+            <h1 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(1.8rem,7.5vw,4.5rem)] leading-tight tracking-tight uppercase drop-shadow-lg whitespace-nowrap">
+              {getCategoryTitle()}
+            </h1>
+
+            <p className="text-[#efe7d2]/60 font-['Forum',serif] text-[14px] md:text-base max-w-lg italic font-light tracking-wide drop-shadow-md mx-auto">
+              Explore our curated selection of hand-crafted masterpieces.
             </p>
           </div>
-        )}
+        </div>
+
+        <div className="pll-container">
+          {collections.map((item, index) => (
+            <ProjectLinkAnimation
+              key={item.id}
+              href={`/collection/${item.id}${category ? `?category=${category}` : ''}`}
+              text={item.text}
+              subtitle={item.subtitle}
+              imageSrc={item.image}
+              delay={300 + (index * 50)}
+            />
+          ))}
+          {collections.length === 0 && (
+            <div className="col-span-full text-center py-20 editorial-reveal" style={{ transitionDelay: '400ms' }}>
+              <p className="text-[#C5A059] font-['Forum',serif] text-xl opacity-60 italic">
+                No collections found for this category.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
