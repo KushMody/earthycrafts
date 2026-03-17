@@ -79,7 +79,7 @@ const Contact = () => {
   };
 
   return (
-    <div className={`w-full h-full bg-[#0c0c0c] flex flex-col md:flex-row overflow-hidden font-['Forum',serif] ${isVisible ? 'is-visible' : ''}`}>
+    <div className={`w-full h-full max-sm:h-auto bg-[#0c0c0c] flex flex-col md:flex-row overflow-hidden max-sm:overflow-y-auto font-['Forum',serif] ${isVisible ? 'is-visible' : ''}`}>
       <style>{`
         .editorial-reveal {
           opacity: 0;
@@ -122,7 +122,7 @@ const Contact = () => {
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full md:w-[40vw] lg:w-[35vw] h-[60vh] md:h-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-10 bg-[#0c0c0c] overflow-y-auto custom-scrollbar font-['Forum',serif]">
+      <div className="w-full md:w-[40vw] lg:w-[35vw] h-auto md:h-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-10 bg-[#0c0c0c] md:overflow-y-auto custom-scrollbar font-['Forum',serif]">
         <div className="w-full max-w-xl editorial-reveal" style={{ transitionDelay: '200ms' }}>
           <div className="text-center mb-8 editorial-reveal" style={{ transitionDelay: '300ms' }}>
             <div className="flex items-center justify-center space-x-4 mb-4">
