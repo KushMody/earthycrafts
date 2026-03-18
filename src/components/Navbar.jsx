@@ -169,16 +169,20 @@ export const MobileMenu = ({ isOpen, onClose }) => {
       {/* Mobile Close Button */}
       <button 
         onClick={onClose}
-        className="absolute top-4 right-4 z-[160] text-[#f1dfb7] border border-[#f1dfb7] rounded-full w-10 h-10 flex items-center justify-center text-3xl font-bold hover:bg-[#f1dfb7] hover:text-black transition-all"
+        className="absolute top-5 right-4 z-[160] text-[#f1dfb7] border border-[#f1dfb7] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#f1dfb7] hover:text-black transition-all"
+        aria-label="Close menu"
       >
-        ×
+        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
       </button>
 
-      {/* Spacer to account for logo area */}
-      <div className="h-16 w-full"></div>
+      {/* Spacer to account for status bar / notch on tall phones */}
+      <div className="h-14 w-full"></div>
 
       {/* Main Navigation Links Area */}
-      <div className="flex-1 flex flex-col space-y-8 text-center justify-center items-center w-full">
+      <div className="flex-1 flex flex-col space-y-7 text-center justify-center items-center w-full px-6">
         {mobileNavItems.map((item) => {
           const isActive = location.pathname === item.href;
           return (
