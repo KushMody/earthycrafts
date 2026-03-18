@@ -27,10 +27,10 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
     <>
       {/* MAIN NAVBAR: Fades out completely when the menu is open.
       */}
-      <nav className={`absolute top-0 left-0 w-full pt-4 px-6 md:pt-6 md:px-12 flex items-center justify-between z-[100] transition-opacity duration-500 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+      <nav className={`absolute top-0 left-0 w-full pt-4 px-8 md:pt-6 md:px-24 flex items-center justify-between z-[200] transition-opacity duration-500 ${isMenuOpen ? 'pointer-events-none' : ''}`}>
         
         {/* Logo */}
-        <div className={`flex items-center ${isLeftAligned ? 'space-x-2' : ''}`}>
+        <div className={`flex items-center ${isLeftAligned ? 'space-x-2' : ''} transition-opacity duration-300 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
             <img
               src={logo}
@@ -42,24 +42,35 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
 
         {/* Desktop Menu Trigger */}
         <button
-          onClick={() => setIsMenuOpen(true)}
-          className="hidden md:flex items-center space-x-2 text-white hover:text-[#D9C394] transition-colors group"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className={`hidden md:flex items-center space-x-2 transition-colors group pointer-events-auto ${isMenuOpen ? 'text-[#1f1f1f] hover:text-[#6b4f2f]' : 'text-white hover:text-[#D9C394]'}`}
         >
           <span className="font-['Forum',serif] tracking-[0.2em] text-2xl uppercase cursor-pointer">
-            Menu
+            {isMenuOpen ? 'Close' : 'Menu'}
           </span>
         </button>
 
         {/* Mobile Hamburger */}
         <button
-          onClick={() => setIsMenuOpen(true)}
-          className="md:hidden text-white p-2 border border-white/20 rounded-xl bg-black/20 backdrop-blur-sm transition-all active:scale-95"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className={`md:hidden transition-all active:scale-95 pointer-events-auto flex items-center justify-center ${
+            isMenuOpen 
+              ? 'w-10 h-10 rounded-full border border-[#f1dfb7] text-[#f1dfb7] bg-transparent' 
+              : 'p-2 border border-white/20 rounded-xl text-white bg-black/20 backdrop-blur-sm'
+          }`}
         >
-          <div className="w-8 h-4 flex flex-col justify-between items-end">
-            <span className={`h-[1.5px] bg-white transition-all duration-300 w-full`}></span>
-            <span className={`h-[1.5px] bg-white transition-all duration-300 w-2/3`}></span>
-            <span className={`h-[1.5px] bg-white transition-all duration-300 w-1/2`}></span>
-          </div>
+          {isMenuOpen ? (
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          ) : (
+            <div className="w-8 h-4 flex flex-col justify-between items-end">
+              <span className="h-[1.5px] bg-white transition-all duration-300 w-full"></span>
+              <span className="h-[1.5px] bg-white transition-all duration-300 w-2/3"></span>
+              <span className="h-[1.5px] bg-white transition-all duration-300 w-1/2"></span>
+            </div>
+          )}
         </button>
       </nav>
 
@@ -82,14 +93,7 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
         isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
     >
-      {/* CLOSE BUTTON (Top Right)
-      */}
-      <button 
-        onClick={onClose}
-        className="absolute top-8 right-12 z-[200] text-[#1f1f1f] hover:text-[#6b4f2f] font-['Forum',serif] tracking-[0.2em] text-xl uppercase transition-colors cursor-pointer"
-      >
-        Close
-      </button>
+      {/* Close button removed as it's now handled by the main Navbar */}
 
       {/* LEFT SIDE: Logo Container */}
       <div className={`w-1/2 h-full flex items-center justify-center relative overflow-hidden bg-[#3d291b] transition-transform duration-700 delay-100 ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
@@ -166,17 +170,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   return (
     <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] flex flex-col items-center justify-between py-12 transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
       
-      {/* Mobile Close Button */}
-      <button 
-        onClick={onClose}
-        className="absolute top-5 right-4 z-[160] text-[#f1dfb7] border border-[#f1dfb7] rounded-full w-10 h-10 flex items-center justify-center hover:bg-[#f1dfb7] hover:text-black transition-all"
-        aria-label="Close menu"
-      >
-        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
+      {/* Mobile close button removed as it's now handled by the main Navbar */}
 
       {/* Spacer to account for status bar / notch on tall phones */}
       <div className="h-14 w-full"></div>
