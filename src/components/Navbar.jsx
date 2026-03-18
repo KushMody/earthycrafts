@@ -4,6 +4,7 @@ const logo = '/Images/Home Page/Logo-2-150x150.png';
 
 // Define nav items to keep the JSX clean and scalable
 const navItems = [
+  { label: 'Home', href: '/' },
   { label: 'Spaces', href: '/categories' },
   { label: 'Collections', href: '/all-collections' },
   { label: 'About Us', href: '/about-us' },
@@ -28,7 +29,7 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
       {/* MAIN NAVBAR: Fades out completely when the menu is open.
       */}
       <nav className={`absolute top-0 left-0 w-full pt-4 px-8 md:pt-6 md:px-24 flex items-center justify-between z-[200] transition-opacity duration-500 ${isMenuOpen ? 'pointer-events-none' : ''}`}>
-        
+
         {/* Logo */}
         <div className={`flex items-center ${isLeftAligned ? 'space-x-2' : ''} transition-opacity duration-300 ${isMenuOpen ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
           <Link to="/" onClick={() => setIsMenuOpen(false)}>
@@ -53,11 +54,10 @@ export const Navbar = ({ isMenuOpen, setIsMenuOpen }) => {
         {/* Mobile Hamburger */}
         <button
           onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className={`md:hidden transition-all active:scale-95 pointer-events-auto flex items-center justify-center ${
-            isMenuOpen 
-              ? 'w-10 h-10 rounded-full border border-[#f1dfb7] text-[#f1dfb7] bg-transparent' 
-              : 'p-2 border border-white/20 rounded-xl text-white bg-black/20 backdrop-blur-sm'
-          }`}
+          className={`md:hidden transition-all active:scale-95 pointer-events-auto flex items-center justify-center ${isMenuOpen
+            ? 'w-10 h-10 rounded-full border border-[#f1dfb7] text-[#f1dfb7] bg-transparent'
+            : 'p-2 border border-white/20 rounded-xl text-white bg-black/20 backdrop-blur-sm'
+            }`}
         >
           {isMenuOpen ? (
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -88,10 +88,9 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
   const location = useLocation();
 
   return (
-    <div 
-      className={`fixed inset-0 bg-[#101116] z-[150] hidden md:flex transition-all duration-700 ease-in-out ${
-        isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-      }`}
+    <div
+      className={`fixed inset-0 bg-[#101116] z-[150] hidden md:flex transition-all duration-700 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
     >
       {/* Close button removed as it's now handled by the main Navbar */}
 
@@ -106,10 +105,10 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
       </div>
 
       {/* RIGHT SIDE: Navigation & Contacts */}
-      <div className={`w-1/2 h-full flex flex-col justify-center px-24 border-l border-white/10 bg-[#f1dfb7] text-[#1f1f1f] transition-transform duration-700 delay-100 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
-        
+      <div className={`w-1/2 h-full flex flex-col justify-center pt-32 px-24 border-l border-white/10 bg-[#f1dfb7] text-[#1f1f1f] transition-transform duration-700 delay-100 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+
         {/* Navigation Links */}
-        <div className="flex flex-col space-y-6 mb-16">
+        <div className="flex flex-col space-y-8 mb-16">
           {navItems.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -127,7 +126,7 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
 
         {/* Contact Details */}
         <div className="w-16 h-px bg-white/20 mb-12"></div>
-        
+
         <div className="flex flex-col space-y-8 text-[#2f1f0f] font-['Forum',serif] text-xl tracking-[0.1em]">
           <a href="tel:+918949181484" className="flex items-center space-x-6 hover:text-[#1f1f1f] transition-colors group">
             <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors border border-[#d0b77f]">
@@ -135,7 +134,7 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
             </div>
             <span>+91 89491 81484</span>
           </a>
-          
+
           <a href="mailto:admin@earthycrafts.com" className="flex items-center space-x-6 hover:text-[#1f1f1f] transition-colors group">
             <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors border border-[#d0b77f]">
               <AtSignIcon />
@@ -169,7 +168,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
 
   return (
     <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] flex flex-col items-center justify-between py-12 transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
-      
+
       {/* Mobile close button removed as it's now handled by the main Navbar */}
 
       {/* Spacer to account for status bar / notch on tall phones */}

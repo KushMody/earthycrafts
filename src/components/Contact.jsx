@@ -94,13 +94,13 @@ const Contact = () => {
         }
       `}</style>
       {/* Left Side - Image with Text */}
-      <div className="relative w-full md:w-[60vw] lg:w-[65vw] h-[40vh] md:h-full overflow-hidden group">
+      <div className="relative w-full md:w-[50vw] lg:w-[50vw] h-[40vh] md:h-full overflow-hidden group">
         <img
           src={bgImage}
           alt="Contact Background"
           className="w-full h-full object-cover contrast-110 transition-transform duration-1000 group-hover:scale-105"
         />
-        
+
         {/* Subtle Overlay for Visibility */}
         <div className="absolute inset-0 bg-black/40 z-10 transition-opacity duration-500"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/50 z-10"></div>
@@ -122,7 +122,7 @@ const Contact = () => {
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full md:w-[40vw] lg:w-[35vw] h-auto md:h-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-10 bg-[#0c0c0c] md:overflow-y-auto custom-scrollbar font-['Forum',serif]">
+      <div className="w-full md:w-[50vw] lg:w-[50vw] h-auto md:h-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-10 bg-[#0c0c0c] md:overflow-y-auto custom-scrollbar font-['Forum',serif]">
         <div className="w-full max-w-xl editorial-reveal" style={{ transitionDelay: '200ms' }}>
           <div className="text-center mb-8 editorial-reveal" style={{ transitionDelay: '300ms' }}>
             <div className="flex items-center justify-center space-x-4 mb-4">
@@ -239,7 +239,7 @@ const Contact = () => {
               >
                 {status === 'sending' ? 'SENDING INQUIRY...' : status === 'success' ? 'INQUIRY SENT!' : 'SUBMIT THE CUSTOM ASK'}
               </button>
-              
+
               {status === 'success' && (
                 <p className="text-[#c29d59] text-center mt-4 text-sm animate-pulse">Thank you! We will get back to you shortly.</p>
               )}
