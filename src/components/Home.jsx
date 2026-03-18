@@ -7,9 +7,9 @@ const heroBg2 = '/Images/Home Page/3-1.jpg'
 const productImg = '/Images/Home Page/1-1.jpg'
 const aboutImg = '/Images/Home Page/5-1.jpg'
 const contactImg = '/Images/Home Page/2-1.jpg'
-const video1 = '/Images/Home Page/Video_1.mp4'
-const video2 = '/Images/Home Page/Video_2.mp4'
-const video3 = '/Images/Home Page/Video_3.mp4'
+const video1 = '/Images/Home Page/Video_1.webm'
+const video2 = '/Images/Home Page/Video_2.webm'
+const video3 = '/Images/Home Page/Video_3.webm'
 
 import { Navbar } from './Navbar';
 

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import homeVideo from '../videos/mainCollections/home.mp4';
-import outdoorVideo from '../videos/mainCollections/outdoor.mp4';
-import gardenVideo from '../videos/mainCollections/garden-landscape.mp4';
+import homeVideo from '../videos/mainCollections/home.webm';
+import outdoorVideo from '../videos/mainCollections/outdoor.webm';
+import gardenVideo from '../videos/mainCollections/garden-landscape.webm';
 
 const Collections = () => {
     const sections = [
