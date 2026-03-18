@@ -162,7 +162,6 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   const location = useLocation();
 
   const mobileNavItems = [
-    { label: 'Home', href: '/' },
     ...navItems
   ];
 
