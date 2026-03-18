@@ -114,10 +114,10 @@ const About = () => {
                     <div className="absolute inset-0 z-10">
                         {/* Overall darkening for general legibility - reduced */}
                         <div className="absolute inset-0 bg-[#080808]/25"></div>
-                        
+
                         {/* Radial center overlay to focus on text - lightened */}
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(8,8,8,0.1)_0%,rgba(8,8,8,0.4)_100%)]"></div>
-                        
+
                         {/* Linear bottom-to-top gradient to ground the buttons - softer */}
                         <div className="absolute inset-0 bg-gradient-to-t from-[#080808]/70 via-transparent to-[#080808]/20"></div>
                     </div>
@@ -165,7 +165,7 @@ const About = () => {
 
             {/* Premium Editorial Modal */}
             {activeModal && (
-                <div 
+                <div
                     className={`fixed inset-0 z-[100] flex items-center justify-center p-3 md:p-8 transition-all duration-300 ease-out ${isModalAnimating ? 'bg-[#080808]/95 backdrop-blur-lg opacity-100' : 'bg-[#080808]/0 backdrop-blur-0 opacity-0'}`}
                     onClick={(e) => { if (e.target === e.currentTarget) handleCloseModal(); }}
                 >
