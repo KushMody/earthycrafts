@@ -89,23 +89,17 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
 
   return (
     <div
-      className={`fixed inset-0 bg-[#101116] z-[150] hidden md:flex transition-all duration-700 ease-in-out ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      className={`fixed inset-0 z-[150] hidden md:flex justify-end transition-all duration-500 ease-in-out ${isOpen ? 'pointer-events-auto' : 'pointer-events-none'
         }`}
     >
-      {/* Close button removed as it's now handled by the main Navbar */}
-
-      {/* LEFT SIDE: Logo Container */}
-      <div className={`w-1/2 h-full flex items-center justify-center relative overflow-hidden bg-[#3d291b] transition-transform duration-700 delay-100 ${isOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="absolute w-[150%] h-[150%] bg-[radial-gradient(circle,rgba(255,255,255,0.03)_0%,transparent_60%)] pointer-events-none"></div>
-        {/* Placeholder for the large abstract logo from your screenshot */}
-        <div className="relative z-10 w-64 h-64">
-          {/* If you have the actual SVG/Image for the vase logo, put it here instead of this div */}
-          <img src={logo} alt="Menu Logo" className="w-full h-full object-contain brightness-110 drop-shadow-2xl mix-blend-screen" />
-        </div>
-      </div>
+      {/* Backdrop */}
+      <div 
+        className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+        onClick={onClose}
+      />
 
       {/* RIGHT SIDE: Navigation & Contacts */}
-      <div className={`w-1/2 h-full flex flex-col justify-center pt-32 px-24 border-l border-white/10 bg-[#f1dfb7] text-[#1f1f1f] transition-transform duration-700 delay-100 ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}>
+      <div className={`relative w-full max-w-[600px] h-full flex flex-col justify-center pt-32 px-24 bg-[#f1dfb7] text-[#1f1f1f] shadow-2xl transition-transform duration-700 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 
         {/* Navigation Links */}
         <div className="flex flex-col space-y-8 mb-16">
@@ -125,18 +119,18 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
         </div>
 
         {/* Contact Details */}
-        <div className="w-16 h-px bg-white/20 mb-12"></div>
+        <div className="w-16 h-px bg-[#4b3b30]/20 mb-12"></div>
 
         <div className="flex flex-col space-y-8 text-[#2f1f0f] font-['Forum',serif] text-xl tracking-[0.1em]">
           <a href="tel:+918949181484" className="flex items-center space-x-6 hover:text-[#1f1f1f] transition-colors group">
-            <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors border border-[#d0b77f]">
+            <div className="p-3 bg-[#4b3b30]/5 rounded-full group-hover:bg-[#4b3b30]/10 transition-colors border border-[#d0b77f]">
               <PhoneIcon />
             </div>
             <span>+91 89491 81484</span>
           </a>
 
           <a href="mailto:admin@earthycrafts.com" className="flex items-center space-x-6 hover:text-[#1f1f1f] transition-colors group">
-            <div className="p-3 bg-white/10 rounded-full group-hover:bg-white/20 transition-colors border border-[#d0b77f]">
+            <div className="p-3 bg-[#4b3b30]/5 rounded-full group-hover:bg-[#4b3b30]/10 transition-colors border border-[#d0b77f]">
               <AtSignIcon />
             </div>
             <span>admin@earthycrafts.com</span>

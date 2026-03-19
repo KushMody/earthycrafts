@@ -244,15 +244,13 @@ const SingleCollection = () => {
   // Map URL params back to the collection/category strings in data.json
   const idToCollectionMap = {
     'blue-pottery': 'Blue Pottery',
-    'beslana': 'BESLANA',
+    'marbles': 'Marbles',
     'furniture': 'Furniture',
-    'bali-stone': 'Bali Stone',
+    'lava-stones': 'Lava Stones',
     'mosaic-art': 'Mosaic Art',
-    'agra-red': 'Agra Red',
-    'green-marble': 'Green Marble',
-    'basalt': 'Basalt',
+    'sandstone': 'Sandstone',
     'temple': 'Temple',
-    'white-marble': 'White Marble'
+    'exotic-stones': 'Exotic Stones'
   };
 
   const categoryIdToNameMap = {
