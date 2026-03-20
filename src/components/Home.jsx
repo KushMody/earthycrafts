@@ -277,8 +277,8 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
           <div className="relative pt-20 pb-4 md:pt-24 p-6 md:p-32 flex flex-col justify-center">
             <div className="relative z-10 editorial-reveal" style={{ transitionDelay: '200ms' }}>
               <span className="text-[#c29d59] text-[10px] md:text-xs tracking-[0.5em] mb-4 md:mb-8 block uppercase opacity-70">The Process</span>
-              <h2 className="text-4xl md:text-8xl font-['Forum',serif] uppercase leading-[0.9] mb-4 md:mb-10 flex flex-col items-start drop-shadow-xl">
-                <span>From <span className="text-[#c29d59]">Dust</span></span>
+              <h2 className="text-4xl md:text-7xl font-['Forum',serif] uppercase leading-[0.9] mb-4 md:mb-10 flex flex-col items-start drop-shadow-xl">
+                <span>From <span className="text-[#c29d59]">Stone</span></span>
                 <span>To Eternal</span>
               </h2>
               <p className="text-[#efe7d2]/60 text-base md:text-xl font-['Forum',serif] leading-relaxed max-w-xl mb-6 md:mb-16 italic">
@@ -295,7 +295,7 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
             <div ref={statsRef} className="absolute bottom-10 left-6 md:bottom-16 md:left-16 editorial-reveal opacity-0">
               <div className="flex items-center space-x-8 text-[#c29d59]">
-                <span className="text-5xl md:text-9xl font-['Forum',serif]">74+</span>
+                <span className="text-5xl md:text-9xl font-['Forum',serif]">25+</span>
                 <div className="h-12 md:h-20 w-[1px] bg-white/20"></div>
                 <span className="text-[8px] md:text-[10px] tracking-[0.5em] md:tracking-[0.6em] uppercase max-w-[80px] md:max-w-[100px]">Years of Stone Artistry</span>
               </div>

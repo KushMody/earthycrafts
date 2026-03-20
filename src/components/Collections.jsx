@@ -170,31 +170,36 @@ const Collections = () => {
                             </span>
                         </div>
 
-                        {/* Content Overlay */}
-                        <div className="relative z-10 text-center px-12 md:px-6 max-w-4xl">
-                            <div className="flex items-center justify-center space-x-6 mb-8 editorial-reveal" style={{ transitionDelay: '100ms' }}>
-                                <div className="h-[1px] w-12 bg-[#c29d59]/30"></div>
-                                <span className="text-[#c29d59] tracking-[0.6em] font-['Forum',serif] text-sm md:text-xs uppercase opacity-90">Collection</span>
-                                <div className="h-[1px] w-12 bg-[#c29d59]/30"></div>
+                        {/* Content Overlay - Full Viewport Clickable */}
+                        <Link 
+                            to={`/all-collections/${section.id}`}
+                            className="relative z-10 w-full h-full flex flex-col items-center justify-center text-center px-12 md:px-6 group cursor-pointer"
+                        >
+                            <div className="max-w-4xl">
+                                <div className="flex items-center justify-center space-x-6 mb-8 editorial-reveal" style={{ transitionDelay: '100ms' }}>
+                                    <div className="h-[1px] w-12 bg-[#c29d59]/30"></div>
+                                    <span className="text-[#c29d59] tracking-[0.6em] font-['Forum',serif] text-sm md:text-xs uppercase opacity-90">Collection</span>
+                                    <div className="h-[1px] w-12 bg-[#c29d59]/30"></div>
+                                </div>
+
+                                <h2 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(2.5rem,10vw,6rem)] md:text-7xl lg:text-9xl mb-6 md:mb-10 tracking-tighter md:tracking-tight uppercase leading-[0.75] md:leading-[0.8] drop-shadow-[0_10px_30px_rgba(0,0,0,0.95)] editorial-reveal" style={{ transitionDelay: '300ms' }}>
+                                    {section.title.split('-').map((word, i) => (
+                                        <span key={i} className="block">{word}</span>
+                                    ))}
+                                </h2>
+
+                                <p className="text-[#efe7d2]/80 font-['Forum',serif] text-base md:text-lg lg:text-xl max-w-xl mx-auto mb-16 leading-relaxed tracking-wide italic font-light editorial-reveal drop-shadow-lg" style={{ transitionDelay: '500ms' }}>
+                                    "{section.subtitle}"
+                                </p>
+
+                                <div className="relative inline-flex flex-col items-center editorial-reveal" style={{ transitionDelay: '700ms' }}>
+                                    <span className="text-[#efe7d2] text-xs md:text-xs tracking-[0.6em] font-['Forum',serif] transition-all duration-500 uppercase opacity-95 group-hover:text-[#c29d59] drop-shadow-md">
+                                        DISCOVER COLLECTION
+                                    </span>
+                                    <div className="mt-4 w-12 h-[1px] bg-[#c29d59]/50 transition-all duration-700 group-hover:w-40 group-hover:bg-[#c29d59]"></div>
+                                </div>
                             </div>
-
-                            <h2 className="text-[#efe7d2] font-['Forum',serif] text-[clamp(2.5rem,10vw,6rem)] md:text-7xl lg:text-9xl mb-6 md:mb-10 tracking-tighter md:tracking-tight uppercase leading-[0.75] md:leading-[0.8] drop-shadow-[0_10px_30px_rgba(0,0,0,0.95)] editorial-reveal" style={{ transitionDelay: '300ms' }}>
-                                {section.title.split('-').map((word, i) => (
-                                    <span key={i} className="block">{word}</span>
-                                ))}
-                            </h2>
-
-                            <p className="text-[#efe7d2]/80 font-['Forum',serif] text-base md:text-lg lg:text-xl max-w-xl mx-auto mb-16 leading-relaxed tracking-wide italic font-light editorial-reveal drop-shadow-lg" style={{ transitionDelay: '500ms' }}>
-                                "{section.subtitle}"
-                            </p>
-
-                            <Link to={`/all-collections/${section.id}`} className="group relative inline-flex flex-col items-center cursor-pointer editorial-reveal" style={{ transitionDelay: '700ms' }}>
-                                <span className="text-[#efe7d2] text-xs md:text-xs tracking-[0.6em] font-['Forum',serif] transition-all duration-500 uppercase opacity-95 group-hover:text-[#c29d59] drop-shadow-md">
-                                    DISCOVER COLLECTION
-                                </span>
-                                <div className="mt-4 w-12 h-[1px] bg-[#c29d59]/50 transition-all duration-700 group-hover:w-40 group-hover:bg-[#c29d59]"></div>
-                            </Link>
-                        </div>
+                        </Link>
 
                         {/* Scroll Down Indicator */}
                         {index < sections.length - 1 && (
