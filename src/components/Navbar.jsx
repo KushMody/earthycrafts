@@ -160,15 +160,11 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] overflow-y-auto transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
-      <div className="min-h-screen flex flex-col items-center py-4 xs:py-8 short:py-12 pb-8 short:pb-16 px-6">
-        {/* Mobile close button handled by Navbar */}
-
-        {/* Spacer for status bar / notch */}
-        <div className="h-6 xs:h-10 short:h-16 w-full shrink-0"></div>
-
-        {/* Main Navigation Links Area */}
-        <div className="flex-1 flex flex-col space-y-3 xshort:space-y-4 short:space-y-8 text-center justify-center items-center w-full my-4 xshort:my-6 short:my-12">
+    <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] flex items-center justify-center p-4 transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
+      <div className="w-full max-w-[320px] flex flex-col items-center text-center space-y-6 xs:space-y-8 short:space-y-4 max-h-full">
+        
+        {/* Navigation Links */}
+        <div className="flex flex-col space-y-3 xs:space-y-5 short:space-y-2">
           {mobileNavItems.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -176,19 +172,21 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 key={item.href}
                 to={item.href}
                 onClick={onClose}
-                className={`group relative text-xl xshort:text-2xl short:text-4xl tracking-[0.2em] font-['Forum',serif] uppercase text-[#f1dfb7] transition-colors ${isActive ? 'text-white' : 'text-[#d5c39d] hover:text-white'}`}
+                className={`group relative text-2xl xs:text-3xl short:text-2xl tracking-[0.2em] font-['Forum',serif] uppercase text-[#f1dfb7] transition-colors ${isActive ? 'text-white' : 'text-[#d5c39d] hover:text-white'}`}
               >
                 {item.label}
-                <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1px] short:h-[2px] bg-white transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1px] bg-white transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
               </Link>
             );
           })}
-          <Link to="/contact-us" className="nav-button mt-4 xshort:mt-6 short:mt-10 bg-black/90 border border-[#d7bf84] text-[#f1dfb7] px-6 py-2 uppercase tracking-widest text-[10px] xs:text-xs short:text-base shadow-lg" onClick={onClose}>Custom Inquiry</Link>
         </div>
 
-        {/* Contact & Socials Area - Pushed to bottom with mt-auto */}
-        <div className={`mt-auto w-full flex flex-col items-center space-y-4 xshort:space-y-6 short:space-y-10 pb-4 transition-all duration-700 delay-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex flex-col items-center space-y-2 xshort:space-y-3 text-[#f1dfb7] font-['Forum',serif] text-[10px] xs:text-xs short:text-lg tracking-[0.1em]">
+        {/* Custom Inquiry Button */}
+        <Link to="/contact-us" className="nav-button bg-black/90 border border-[#d7bf84] text-[#f1dfb7] px-6 py-2 uppercase tracking-widest text-[10px] xs:text-xs short:text-[10px] shadow-lg" onClick={onClose}>Custom Inquiry</Link>
+
+        {/* Contact & Socials Area - Compact Grouped */}
+        <div className={`w-full flex flex-col items-center space-y-5 xs:space-y-8 short:space-y-4 pt-4 xs:pt-8 short:pt-4 border-t border-[#f1dfb7]/10 transition-all duration-700 delay-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex flex-col items-center space-y-2 text-[#f1dfb7] font-['Forum',serif] text-[10px] xs:text-xs short:text-[10px] tracking-[0.1em]">
             <a href="tel:+918949181484" className="flex items-center space-x-3 hover:text-white transition-colors">
               <PhoneIcon />
               <span>+91 89491 81484</span>
@@ -199,11 +197,11 @@ export const MobileMenu = ({ isOpen, onClose }) => {
             </a>
           </div>
 
-          <div className="flex items-center space-x-6 xshort:space-x-8 pt-2 text-[#f1dfb7]">
-            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><WhatsappIcon /></a>
-            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><FacebookIcon /></a>
-            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><InstagramIcon /></a>
-            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><LinkedinIcon /></a>
+          <div className="flex items-center space-x-6 pt-1 text-[#f1dfb7]">
+            <a href="#" className="hover:text-white transition-colors scale-75 xs:scale-90 short:scale-75"><WhatsappIcon /></a>
+            <a href="#" className="hover:text-white transition-colors scale-75 xs:scale-90 short:scale-75"><FacebookIcon /></a>
+            <a href="#" className="hover:text-white transition-colors scale-75 xs:scale-90 short:scale-75"><InstagramIcon /></a>
+            <a href="#" className="hover:text-white transition-colors scale-75 xs:scale-90 short:scale-75"><LinkedinIcon /></a>
           </div>
         </div>
       </div>
