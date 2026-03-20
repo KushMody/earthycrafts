@@ -180,7 +180,7 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
                 ${index === currentSlide ? 'opacity-40 scale-105 blur-none' : 'opacity-0 scale-100 blur-md'}`}
             />
           ))}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-[#0c0c0c]"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#0c0c0c]"></div>
         </div>
 
         <div className="relative z-10 text-center px-6 mt-20 editorial-reveal" style={{ transitionDelay: '200ms' }}>

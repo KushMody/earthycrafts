@@ -7,6 +7,8 @@ import About from './components/About'
 import AllCollections from './components/AllCollections'
 import SingleCollection from './components/SingleCollection'
 import Home from './components/Home'
+import AllProducts from './components/AllProducts'
+import FloatingShopButton from './components/FloatingShopButton'
 import { Navbar, MobileMenu } from './components/Navbar'
 import Loader from './components/Loader'
 import { preloadAssets } from './utils/preloader';
@@ -50,6 +52,18 @@ function App() {
   const handleAnimationComplete = () => {
     setAnimationComplete(true)
   }
+
+  // Prevent scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+    return () => {
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMenuOpen])
 
   return (
     <BrowserRouter>
@@ -105,6 +119,12 @@ function App() {
                   <AllCollections />
                 </div>
               } />
+              <Route path="/all-products" element={
+                <div className="w-full h-full relative overflow-y-auto">
+                  <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+                  <AllProducts />
+                </div>
+              } />
               {/* Dynamic Route for individual collections */}
               <Route path="/collection/:id" element={
                 <div className="w-full h-full relative overflow-y-auto">
@@ -125,6 +145,7 @@ function App() {
                 </div>
               } />
             </Routes>
+            <FloatingShopButton />
           </motion.div>
         )}
       </AnimatePresence>

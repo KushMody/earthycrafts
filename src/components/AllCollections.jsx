@@ -375,12 +375,12 @@ const AllCollections = () => {
           />
         ))}
         {/* Cinematic Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c0c]/85 via-transparent to-[#0c0c0c]/95 z-10"></div>
-        <div className="absolute inset-0 backdrop-blur-[1.5px] bg-black/30 z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0c0c0c]/95 z-10"></div>
+        <div className="absolute inset-0 backdrop-blur-[1px] bg-black/10 z-10"></div>
       </div>
 
       {/* Content Layer (Top of Background) */}
-      <div className="absolute inset-0 z-20 flex flex-col max-md:overflow-y-auto md:overflow-hidden pt-22 md:pt-26">
+      <div className="absolute inset-0 z-20 flex flex-col max-md:overflow-y-auto md:overflow-hidden pt-20 md:pt-24">
         {/* Condensed Premium Header */}
         <div className="max-w-[1400px] mx-auto w-full px-8 md:px-[60px] mb-6 md:mb-8 flex-shrink-0">
           <div className="flex flex-col items-center text-center space-y-3 editorial-reveal" style={{ transitionDelay: '200ms' }}>
