@@ -15,6 +15,9 @@
 @theme {
     --font-serif: "Forum", serif;
     --font-sans: "Plus Jakarta Sans", sans-serif;
+    --breakpoint-xs: 375px;
+    --breakpoint-short: (max-height: 750px);
+    --breakpoint-xshort: (max-height: 600px);
 }
 
 :root {

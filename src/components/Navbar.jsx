@@ -160,50 +160,51 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   ];
 
   return (
-    <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] flex flex-col items-center justify-between py-12 transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
+    <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] overflow-y-auto transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
+      <div className="min-h-screen flex flex-col items-center py-4 xs:py-8 short:py-12 pb-8 short:pb-16 px-6">
+        {/* Mobile close button handled by Navbar */}
 
-      {/* Mobile close button removed as it's now handled by the main Navbar */}
+        {/* Spacer for status bar / notch */}
+        <div className="h-6 xs:h-10 short:h-16 w-full shrink-0"></div>
 
-      {/* Spacer to account for status bar / notch on tall phones */}
-      <div className="h-14 w-full"></div>
-
-      {/* Main Navigation Links Area */}
-      <div className="flex-1 flex flex-col space-y-7 text-center justify-center items-center w-full px-6">
-        {mobileNavItems.map((item) => {
-          const isActive = location.pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              to={item.href}
-              onClick={onClose}
-              className={`group relative text-3xl tracking-[0.2em] font-['Forum',serif] uppercase text-[#f1dfb7] transition-colors ${isActive ? 'text-white' : 'text-[#d5c39d] hover:text-white'}`}
-            >
-              {item.label}
-              <span className={`absolute -bottom-2 left-1/2 -translate-x-1/2 h-[2px] bg-white transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
-            </Link>
-          );
-        })}
-        <Link to="/contact-us" className="nav-button mt-8 bg-black/90 border border-[#d7bf84] text-[#f1dfb7] px-6 py-2 uppercase tracking-widest text-sm shadow-lg" onClick={onClose}>Custom Inquiry</Link>
-      </div>
-
-      {/* Contact & Socials Area */}
-      <div className={`w-full flex flex-col items-center space-y-8 pb-8 transition-all duration-700 delay-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <div className="flex flex-col items-start space-y-4 text-[#f1dfb7] font-['Forum',serif] text-base tracking-[0.1em]">
-          <a href="tel:+918949181484" className="flex items-center space-x-4 hover:text-white transition-colors">
-            <PhoneIcon />
-            <span>Phone: +91 89491 81484</span>
-          </a>
-          <a href="mailto:admin@earthycrafts.com" className="flex items-center space-x-4 hover:text-white transition-colors">
-            <AtSignIcon />
-            <span>Email: admin@earthycrafts.com</span>
-          </a>
+        {/* Main Navigation Links Area */}
+        <div className="flex-1 flex flex-col space-y-3 xshort:space-y-4 short:space-y-8 text-center justify-center items-center w-full my-4 xshort:my-6 short:my-12">
+          {mobileNavItems.map((item) => {
+            const isActive = location.pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                to={item.href}
+                onClick={onClose}
+                className={`group relative text-xl xshort:text-2xl short:text-4xl tracking-[0.2em] font-['Forum',serif] uppercase text-[#f1dfb7] transition-colors ${isActive ? 'text-white' : 'text-[#d5c39d] hover:text-white'}`}
+              >
+                {item.label}
+                <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1px] short:h-[2px] bg-white transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+              </Link>
+            );
+          })}
+          <Link to="/contact-us" className="nav-button mt-4 xshort:mt-6 short:mt-10 bg-black/90 border border-[#d7bf84] text-[#f1dfb7] px-6 py-2 uppercase tracking-widest text-[10px] xs:text-xs short:text-base shadow-lg" onClick={onClose}>Custom Inquiry</Link>
         </div>
 
-        <div className="flex items-center space-x-8 pt-2 text-[#f1dfb7]">
-          <a href="#" className="hover:text-white transition-colors"><WhatsappIcon /></a>
-          <a href="#" className="hover:text-white transition-colors"><FacebookIcon /></a>
-          <a href="#" className="hover:text-white transition-colors"><InstagramIcon /></a>
-          <a href="#" className="hover:text-white transition-colors"><LinkedinIcon /></a>
+        {/* Contact & Socials Area - Pushed to bottom with mt-auto */}
+        <div className={`mt-auto w-full flex flex-col items-center space-y-4 xshort:space-y-6 short:space-y-10 pb-4 transition-all duration-700 delay-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex flex-col items-center space-y-2 xshort:space-y-3 text-[#f1dfb7] font-['Forum',serif] text-[10px] xs:text-xs short:text-lg tracking-[0.1em]">
+            <a href="tel:+918949181484" className="flex items-center space-x-3 hover:text-white transition-colors">
+              <PhoneIcon />
+              <span>+91 89491 81484</span>
+            </a>
+            <a href="mailto:admin@earthycrafts.com" className="flex items-center space-x-3 hover:text-white transition-colors">
+              <AtSignIcon />
+              <span>admin@earthycrafts.com</span>
+            </a>
+          </div>
+
+          <div className="flex items-center space-x-6 xshort:space-x-8 pt-2 text-[#f1dfb7]">
+            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><WhatsappIcon /></a>
+            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><FacebookIcon /></a>
+            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><InstagramIcon /></a>
+            <a href="#" className="hover:text-white transition-colors scale-75 xshort:scale-90 short:scale-110"><LinkedinIcon /></a>
+          </div>
         </div>
       </div>
     </div>
