@@ -4,38 +4,40 @@ import logo1 from '../assets/1-removebg-preview.png'
 import logo5 from '../assets/5-removebg-preview.png'
 
 const Loader = ({ onComplete }) => {
+  const [logoScaled, setLogoScaled] = useState(false)
   const [startTyping, setStartTyping] = useState(false)
   const [hideCursor, setHideCursor] = useState(false)
 
   useEffect(() => {
-    // Stage 1: Initial Delay reduced for seamless flow
-    const startTimer = setTimeout(() => {
+    // Stage 1: No delay, start logo scaling as it fades in
+    setLogoScaled(true)
+
+    // Stage 2: Wait for logo scaling (0.4s) to finish, then start text
+    const textTimer = setTimeout(() => {
       setStartTyping(true)
 
-      // Stage 2: Hide cursor after typing is finished
-      const cursorTimer = setTimeout(() => {
+      // Stage 3: Wait for text typing (2.0s duration) + buffer before completion
+      const completionTimer = setTimeout(() => {
         setHideCursor(true)
         if (onComplete) onComplete()
-      }, 2500)
+      }, 2200)
 
-      return () => clearTimeout(cursorTimer)
-    }, 100) // Reduced to 100ms for no pause transition
+      return () => clearTimeout(completionTimer)
+    }, 400) // Matches logo scaling duration
 
-    return () => clearTimeout(startTimer)
+    return () => clearTimeout(textTimer)
   }, [onComplete])
 
   return (
     <div className="fixed inset-0 z-[9999] bg-[#050505] flex items-center justify-center overflow-hidden w-full selection:bg-[#c5a176]/30">
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
+        initial={{ opacity: 0 }}
         animate={{
           opacity: 1,
-          scale: 1,
           gap: startTyping ? (window.innerWidth < 768 ? 4 : 8) : 0
         }}
         transition={{
-          duration: 0.8,
-          ease: [0.16, 1, 0.3, 1],
+          opacity: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
           gap: { duration: 1.2, ease: "linear" }
         }}
         className="flex items-center justify-center p-4"
@@ -43,14 +45,15 @@ const Loader = ({ onComplete }) => {
         {/* Logo (Image 1) */}
         <motion.div
           layout
+          transition={{ layout: { duration: 0.6, ease: "linear" } }}
           className="flex-shrink-0 z-20 flex items-center justify-center"
         >
           <motion.img
             src={logo1}
             alt="Logo"
             animate={{
-              width: startTyping ? (window.innerWidth < 768 ? 90 : 160) : (window.innerWidth < 768 ? 180 : 240),
-              height: startTyping ? (window.innerWidth < 768 ? 90 : 160) : (window.innerWidth < 768 ? 180 : 240),
+              width: logoScaled ? (window.innerWidth < 768 ? 90 : 160) : (window.innerWidth < 768 ? 180 : 240),
+              height: logoScaled ? (window.innerWidth < 768 ? 90 : 160) : (window.innerWidth < 768 ? 180 : 240),
             }}
             transition={{
               duration: 0.5,
@@ -70,7 +73,7 @@ const Loader = ({ onComplete }) => {
           }}
           style={{ originX: 0 }}
           transition={{
-            duration: 2.0,
+            duration: 1.2,
             ease: "linear",
             delay: 0.1,
             layout: { duration: 1.2, ease: "linear" }
