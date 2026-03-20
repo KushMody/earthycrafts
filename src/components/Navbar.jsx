@@ -93,7 +93,7 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
         }`}
     >
       {/* Backdrop */}
-      <div 
+      <div
         className={`absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-500 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
         onClick={onClose}
       />
@@ -162,7 +162,7 @@ export const MobileMenu = ({ isOpen, onClose }) => {
   return (
     <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] flex items-center justify-center p-4 transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
       <div className="w-full max-w-[320px] flex flex-col items-center text-center space-y-6 xs:space-y-8 short:space-y-4 max-h-full">
-        
+
         {/* Navigation Links */}
         <div className="flex flex-col space-y-3 xs:space-y-5 short:space-y-2">
           {mobileNavItems.map((item) => {
@@ -184,9 +184,8 @@ export const MobileMenu = ({ isOpen, onClose }) => {
         {/* Custom Inquiry Button */}
         <Link to="/contact-us" className="nav-button bg-black/90 border border-[#d7bf84] text-[#f1dfb7] px-6 py-2 uppercase tracking-widest text-[10px] xs:text-xs short:text-[10px] shadow-lg" onClick={onClose}>Custom Inquiry</Link>
 
-        {/* Contact & Socials Area - Compact Grouped */}
         <div className={`w-full flex flex-col items-center space-y-5 xs:space-y-8 short:space-y-4 pt-4 xs:pt-8 short:pt-4 border-t border-[#f1dfb7]/10 transition-all duration-700 delay-300 ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex flex-col items-center space-y-2 text-[#f1dfb7] font-['Forum',serif] text-[10px] xs:text-xs short:text-[10px] tracking-[0.1em]">
+          <div className="flex flex-col items-center space-y-2 text-[#f1dfb7] font-['Forum',serif] text-sm xs:text-base short:text-sm tracking-[0.1em]">
             <a href="tel:+918949181484" className="flex items-center space-x-3 hover:text-white transition-colors">
               <PhoneIcon />
               <span>+91 89491 81484</span>
