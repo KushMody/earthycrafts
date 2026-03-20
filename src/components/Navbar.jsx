@@ -99,10 +99,10 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
       />
 
       {/* RIGHT SIDE: Navigation & Contacts */}
-      <div className={`relative w-full max-w-[600px] h-full flex flex-col justify-center pt-32 px-24 bg-[#f1dfb7] text-[#1f1f1f] shadow-2xl transition-transform duration-700 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+      <div className={`relative w-full max-w-[600px] h-full flex flex-col justify-center pt-20 short:pt-16 xshort:pt-12 px-12 short:px-16 xshort:px-12 bg-[#f1dfb7] text-[#1f1f1f] shadow-2xl transition-transform duration-700 ease-out ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}>
 
         {/* Navigation Links */}
-        <div className="flex flex-col space-y-8 mb-16">
+        <div className="flex flex-col space-y-6 short:space-y-4 xshort:space-y-2 mb-8 short:mb-6 xshort:mb-4">
           {navItems.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -110,7 +110,7 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
                 key={item.href}
                 to={item.href}
                 onClick={onClose}
-                className={`w-max text-3xl font-['Forum',serif] tracking-[0.2em] uppercase transition-colors ${isActive ? 'text-[#6b4f2f]' : 'text-[#4b3b30] hover:text-[#1f1f1f]'}`}
+                className={`w-max text-3xl short:text-2xl xshort:text-xl font-['Forum',serif] tracking-[0.2em] uppercase transition-colors ${isActive ? 'text-[#6b4f2f]' : 'text-[#4b3b30] hover:text-[#1f1f1f]'}`}
               >
                 {item.label}
               </Link>
@@ -119,18 +119,18 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
         </div>
 
         {/* Contact Details */}
-        <div className="w-16 h-px bg-[#4b3b30]/20 mb-12"></div>
+        <div className="w-16 h-px bg-[#4b3b30]/20 mb-8 short:mb-4 xshort:mb-2"></div>
 
-        <div className="flex flex-col space-y-8 text-[#2f1f0f] font-['Forum',serif] text-xl tracking-[0.1em]">
+        <div className="flex flex-col space-y-6 short:space-y-4 xshort:space-y-2 text-[#2f1f0f] font-['Forum',serif] text-xl short:text-lg xshort:text-base tracking-[0.1em]">
           <a href="tel:+918949181484" className="flex items-center space-x-6 hover:text-[#1f1f1f] transition-colors group">
-            <div className="p-3 bg-[#4b3b30]/5 rounded-full group-hover:bg-[#4b3b30]/10 transition-colors border border-[#d0b77f]">
+            <div className="p-2 short:p-2 bg-[#4b3b30]/5 rounded-full group-hover:bg-[#4b3b30]/10 transition-colors border border-[#d0b77f] scale-90 short:scale-75 xshort:scale-75">
               <PhoneIcon />
             </div>
             <span>+91 89491 81484</span>
           </a>
 
           <a href="mailto:admin@earthycrafts.com" className="flex items-center space-x-6 hover:text-[#1f1f1f] transition-colors group">
-            <div className="p-3 bg-[#4b3b30]/5 rounded-full group-hover:bg-[#4b3b30]/10 transition-colors border border-[#d0b77f]">
+            <div className="p-2 short:p-2 bg-[#4b3b30]/5 rounded-full group-hover:bg-[#4b3b30]/10 transition-colors border border-[#d0b77f] scale-90 short:scale-75 xshort:scale-75">
               <AtSignIcon />
             </div>
             <span>admin@earthycrafts.com</span>
@@ -138,11 +138,11 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
         </div>
 
         {/* Social Icons */}
-        <div className="flex space-x-8 mt-12 text-[#2f1f0f]">
-          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all"><WhatsappIcon /></a>
-          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all"><FacebookIcon /></a>
-          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all"><InstagramIcon /></a>
-          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all"><LinkedinIcon /></a>
+        <div className="flex space-x-8 short:space-x-6 mt-8 short:mt-4 xshort:mt-2 text-[#2f1f0f]">
+          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all scale-100 short:scale-90 xshort:scale-75"><WhatsappIcon /></a>
+          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all scale-100 short:scale-90 xshort:scale-75"><FacebookIcon /></a>
+          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all scale-100 short:scale-90 xshort:scale-75"><InstagramIcon /></a>
+          <a href="#" className="hover:text-[#1f1f1f] hover:-translate-y-1 transition-all scale-100 short:scale-90 xshort:scale-75"><LinkedinIcon /></a>
         </div>
       </div>
     </div>
