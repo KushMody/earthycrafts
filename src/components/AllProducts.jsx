@@ -180,10 +180,10 @@ const AllProducts = () => {
         </div>
 
         {/* Search & Filters Section */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-8 mb-12 flex flex-col md:flex-row gap-6 items-end editorial-reveal" style={{ transitionDelay: '200ms' }}>
+        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 mb-12 flex flex-col lg:flex-row gap-6 items-end editorial-reveal" style={{ transitionDelay: '200ms' }}>
 
           {/* Name Search */}
-          <div className="flex-1 w-full space-y-2">
+          <div className="w-full lg:flex-1 space-y-2">
             <label className="text-xs font-['Forum',serif] text-[#C5A059] uppercase tracking-widest pl-1">Search Product</label>
             <div className="relative group">
               <input
@@ -197,30 +197,33 @@ const AllProducts = () => {
             </div>
           </div>
 
-          {/* Category Filter */}
-          <div className="w-full md:w-64 space-y-2">
-            <label className="text-xs font-['Forum',serif] text-[#C5A059] uppercase tracking-widest pl-1">Category</label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="w-full bg-black/40 border border-white/10 rounded-xl py-3.5 px-4 text-[#efe7d2] font-['Forum',serif] text-lg outline-none appearance-none cursor-pointer focus:border-[#c29d59]/50"
-              style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'rgba(197, 160, 89, 0.5)\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2rem' }}
-            >
-              {categories.map(cat => <option key={cat} value={cat} style={{ background: '#1c1c1c' }}>{cat}</option>)}
-            </select>
-          </div>
+          {/* Filters Container */}
+          <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
+            {/* Category Filter */}
+            <div className="w-full sm:w-1/2 lg:w-64 space-y-2">
+              <label className="text-xs font-['Forum',serif] text-[#C5A059] uppercase tracking-widest pl-1">Category</label>
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl py-3.5 px-4 text-[#efe7d2] font-['Forum',serif] text-lg outline-none appearance-none cursor-pointer focus:border-[#c29d59]/50"
+                style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'rgba(197, 160, 89, 0.5)\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2rem' }}
+              >
+                {categories.map(cat => <option key={cat} value={cat} style={{ background: '#1c1c1c' }}>{cat}</option>)}
+              </select>
+            </div>
 
-          {/* Collection Filter */}
-          <div className="w-full md:w-64 space-y-2">
-            <label className="text-xs font-['Forum',serif] text-[#C5A059] uppercase tracking-widest pl-1">Collection</label>
-            <select
-              value={selectedCollection}
-              onChange={(e) => setSelectedCollection(e.target.value)}
-              className="w-full bg-black/40 border border-white/10 rounded-xl py-3.5 px-4 text-[#efe7d2] font-['Forum',serif] text-lg outline-none appearance-none cursor-pointer focus:border-[#c29d59]/50"
-              style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'rgba(197, 160, 89, 0.5)\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2rem' }}
-            >
-              {collections.map(col => <option key={col} value={col} style={{ background: '#1c1c1c' }}>{col}</option>)}
-            </select>
+            {/* Collection Filter */}
+            <div className="w-full sm:w-1/2 lg:w-64 space-y-2">
+              <label className="text-xs font-['Forum',serif] text-[#C5A059] uppercase tracking-widest pl-1">Collection</label>
+              <select
+                value={selectedCollection}
+                onChange={(e) => setSelectedCollection(e.target.value)}
+                className="w-full bg-black/40 border border-white/10 rounded-xl py-3.5 px-4 text-[#efe7d2] font-['Forum',serif] text-lg outline-none appearance-none cursor-pointer focus:border-[#c29d59]/50"
+                style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'rgba(197, 160, 89, 0.5)\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1.2rem' }}
+              >
+                {collections.map(col => <option key={col} value={col} style={{ background: '#1c1c1c' }}>{col}</option>)}
+              </select>
+            </div>
           </div>
 
           {/* Clear Button */}

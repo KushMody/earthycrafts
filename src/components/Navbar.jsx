@@ -3,11 +3,35 @@ import { Link, useLocation } from "react-router-dom";
 const logo = '/Images/Home Page/Logo-2-150x150.png';
 
 // Define nav items to keep the JSX clean and scalable
+const AllProductsPill = ({ isMobile }) => {
+  return (
+    // <div className={`group relative flex items-center gap-4 pl-5 pr-8 py-3.5 rounded-full transition-all duration-300 overflow-hidden ${isMobile ? 'bg-white/5 border border-white/10 hover:border-[#C5A059]/40' : 'bg-[#4b3b30]/5 border border-[#d0b77f] hover:bg-[#4b3b30]/10'}`}>
+    //   {/* Premium Shine Effect */}
+    //   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shine_2s_ease-in-out_infinite] transition-transform pointer-events-none"></div>
+    <div className="flex items-center gap-4">
+      {/* Icon */}
+      <div className="w-10 h-10 bg-[#C5A059] rounded-full flex items-center justify-center text-[#1a1a1a] relative z-10 flex-shrink-0 shadow-[0_0_15px_rgba(197,160,89,0.3)] group-hover:scale-110 transition-transform duration-500">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </svg>
+      </div>
+
+      {/* Text Layer */}
+      <div className="flex flex-col items-start relative z-10">
+        <span className={`font-['Forum',serif] text-sm md:text-base uppercase tracking-[0.15em] transition-colors ${isMobile ? 'text-[#f1dfb7] group-hover:text-white' : 'text-[#1a1a1a] group-hover:text-[#6b4f2f]'}`}>
+          Search from All Products
+        </span>
+      </div>
+    </div>
+  );
+};
+
 const navItems = [
+  { id: 'all-products', label: 'All Products', href: '/all-products', isPill: true },
   { label: 'Home', href: '/' },
   { label: 'Spaces', href: '/categories' },
   { label: 'Collections', href: '/all-collections' },
-  { label: 'All Products', href: '/all-products' },
   { label: 'About Us', href: '/about-us' },
   { label: 'Contact Us', href: '/contact-us' },
 ];
@@ -111,9 +135,9 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
                 key={item.href}
                 to={item.href}
                 onClick={onClose}
-                className={`w-max text-3xl short:text-2xl xshort:text-xl font-['Forum',serif] tracking-[0.2em] uppercase transition-colors ${isActive ? 'text-[#6b4f2f]' : 'text-[#4b3b30] hover:text-[#1f1f1f]'}`}
+                className={`w-max transition-all duration-300 ${item.isPill ? '' : `text-3xl short:text-2xl xshort:text-xl font-['Forum',serif] tracking-[0.2em] uppercase ${isActive ? 'text-[#6b4f2f]' : 'text-[#4b3b30] hover:text-[#1f1f1f]'}`}`}
               >
-                {item.label}
+                {item.isPill ? <AllProductsPill isMobile={false} /> : item.label}
               </Link>
             );
           })}
@@ -158,9 +182,7 @@ export const DesktopMenu = ({ isOpen, onClose }) => {
 export const MobileMenu = ({ isOpen, onClose }) => {
   const location = useLocation();
 
-  const mobileNavItems = [
-    ...navItems
-  ];
+  const mobileNavItems = navItems.filter(item => item.id !== 'all-products');
 
   return (
     <div className={`fixed inset-0 bg-[#0c0c0c] z-[150] flex items-center justify-center p-4 transition-all duration-500 ease-in-out md:hidden ${isOpen ? 'translate-y-0 opacity-100 pointer-events-auto' : 'translate-y-[-20px] opacity-0 pointer-events-none'}`}>
@@ -175,10 +197,12 @@ export const MobileMenu = ({ isOpen, onClose }) => {
                 key={item.href}
                 to={item.href}
                 onClick={onClose}
-                className={`group relative text-2xl xs:text-3xl short:text-2xl tracking-[0.2em] font-['Forum',serif] uppercase text-[#f1dfb7] transition-colors ${isActive ? 'text-white' : 'text-[#d5c39d] hover:text-white'}`}
+                className={`group relative transition-all duration-300 ${item.isPill ? 'w-full max-w-[280px]' : `text-2xl xs:text-3xl short:text-2xl tracking-[0.2em] font-['Forum',serif] uppercase ${isActive ? 'text-white' : 'text-[#d5c39d] hover:text-white'}`}`}
               >
-                {item.label}
-                <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1px] bg-white transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                {item.isPill ? <AllProductsPill isMobile={true} /> : item.label}
+                {!item.isPill && (
+                  <span className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-[1px] bg-white transition-all duration-300 ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
+                )}
               </Link>
             );
           })}

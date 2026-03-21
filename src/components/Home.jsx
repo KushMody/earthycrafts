@@ -59,8 +59,8 @@ const GalleryCard = ({ img, video, title, label, to, className, style }) => {
       {/* Layered Overlays for Depth */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 z-10 opacity-60 group-hover:opacity-80 transition-opacity duration-700"></div>
 
-      {/* Reduced padding to p-4 on mobile for shorter cards */}
-      <div className="absolute inset-0 p-3 md:p-8 flex flex-col justify-between z-20">
+      {/* Increased padding for phones only, kept original for desktop/tablet */}
+      <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-20">
         {/* Top Section */}
         {/* Scaled title down to text-base for mobile, text-2xl for desktop */}
         <h3 className="text-[#efe7d2] font-['Forum',serif] text-sm md:text-2xl lg:text-3xl uppercase leading-[1.1] tracking-tight transition-colors duration-500 group-hover:text-white">
@@ -77,8 +77,8 @@ const GalleryCard = ({ img, video, title, label, to, className, style }) => {
 
       {/* Signature Black Tab */}
       {/* Shrunk the black tab and text slightly on mobile */}
-      <div className="absolute bottom-0 right-0 bg-[#0c0c0c] px-4 py-3 md:px-6 md:py-4 rounded-tl-[1.25rem] md:rounded-tl-[2rem] z-30 transition-transform duration-500">
-        <span className="text-white text-[9px] md:text-[11px] tracking-[0.15em] md:tracking-[0.2em] font-['Plus_Jakarta_Sans',sans-serif] uppercase whitespace-nowrap">
+      <div className="absolute bottom-0 right-0 bg-[#0c0c0c] px-4 py-3 lg:px-6 lg:py-4 rounded-tl-[1.25rem] lg:rounded-tl-[2rem] z-30 transition-transform duration-500">
+        <span className="text-white text-[9px] lg:text-[11px] tracking-[0.15em] lg:tracking-[0.2em] font-['Plus_Jakarta_Sans',sans-serif] uppercase whitespace-nowrap">
           {label} —
         </span>
       </div>
@@ -216,7 +216,7 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
           </div>
 
           {/* Cards Wrapper */}
-          <div className="w-full max-w-[85%] md:max-w-none mx-auto flex flex-col md:flex-row items-center justify-center gap-2 md:gap-5 pb-6 md:pb-0">
+          <div className="w-full max-w-[85%] md:max-w-none mx-auto px-6 md:px-10 lg:px-0 grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-row items-center justify-center gap-6 pb-6 md:pb-0">
 
             {/* Card 1 */}
             <GalleryCard
@@ -228,8 +228,8 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
               className="editorial-reveal 
     w-full 
     h-[22vh] min-h-[150px] max-h-[200px] 
-    md:h-[30vh] md:w-[18vw] 
-    lg:h-[28vh] lg:w-[14vw] 
+    md:h-[30vh] md:w-full 
+    lg:h-[35vh] lg:w-[24vw] 
     flex-shrink-0"
               style={{ transitionDelay: '0.4s' }}
             />
@@ -244,8 +244,8 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
               className="editorial-reveal 
     w-full 
     h-[22vh] min-h-[150px] max-h-[200px] 
-    md:h-[30vh] md:w-[18vw] 
-    lg:h-[28vh] lg:w-[14vw] 
+    md:h-[30vh] md:w-full 
+    lg:h-[35vh] lg:w-[24vw] 
     flex-shrink-0"
               style={{ transitionDelay: '0.55s' }}
             />
@@ -260,8 +260,8 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
               className="editorial-reveal 
     w-full 
     h-[22vh] min-h-[150px] max-h-[200px] 
-    md:h-[30vh] md:w-[18vw] 
-    lg:h-[28vh] lg:w-[14vw] 
+    md:h-[30vh] md:col-span-2 md:w-full md:max-w-none
+    lg:h-[35vh] lg:w-[24vw] 
     flex-shrink-0"
               style={{ transitionDelay: '0.7s' }}
             />
@@ -274,14 +274,14 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
       {/* 3. NARRATIVE */}
       <section className={`snap-section bg-[#0c0c0c] border-t border-white/5 ${activeSection === 2 ? 'section-visible' : ''}`}>
         <div className="grid md:grid-cols-2 h-full">
-          <div className="relative pt-20 pb-4 md:pt-24 p-6 md:p-32 flex flex-col justify-center">
+          <div className="relative pt-20 pb-4 md:pt-24 p-6 md:p-12 lg:p-32 flex flex-col justify-center">
             <div className="relative z-10 editorial-reveal" style={{ transitionDelay: '200ms' }}>
               <span className="text-[#c29d59] text-[10px] md:text-xs tracking-[0.5em] mb-4 md:mb-8 block uppercase opacity-70">The Process</span>
-              <h2 className="text-4xl md:text-7xl font-['Forum',serif] uppercase leading-[0.9] mb-4 md:mb-10 flex flex-col items-start drop-shadow-xl">
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-['Forum',serif] uppercase leading-[0.9] mb-4 md:mb-10 flex flex-col items-start drop-shadow-xl">
                 <span>From <span className="text-[#c29d59]">Stone</span></span>
                 <span>To Eternal</span>
               </h2>
-              <p className="text-[#efe7d2]/60 text-base md:text-xl font-['Forum',serif] leading-relaxed max-w-xl mb-6 md:mb-16 italic">
+              <p className="text-[#efe7d2]/60 text-base md:text-lg lg:text-xl font-['Forum',serif] leading-relaxed max-w-xl mb-6 md:mb-16 italic">
                 "We don't just carve stone; we release the spirit within."
               </p>
               <Link to="/about-us" className="inline-flex items-center space-x-8 group">
