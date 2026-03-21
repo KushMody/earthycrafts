@@ -68,7 +68,7 @@ const Loader = ({ onComplete }) => {
           layout
           initial={{ width: 0, opacity: 0, scale: 1 }}
           animate={{
-            width: startTyping ? (window.innerWidth < 768 ? 160 : 250) : 0,
+            width: startTyping ? (window.innerWidth < 768 ? 130 : 250) : 0,
             opacity: startTyping ? 1 : 0
           }}
           style={{ originX: 0 }}
