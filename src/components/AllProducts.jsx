@@ -110,18 +110,90 @@ const ProductCard = ({ product, index, onOpenLightbox, getImagePath }) => {
 
 const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
   if (!isOpen || !product) return null;
+
   return (
-    <div onClick={(e) => e.target.id === 'lb-overlay' && onClose()} id="lb-overlay" style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0,0,0,0.95)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}>
-      <button onClick={onClose} style={{ position: 'absolute', top: '1.5rem', right: '1.5rem', background: '#3d291b', color: '#f1dfb7', border: 'none', borderRadius: '50%', width: '44px', height: '44px', cursor: 'pointer', zIndex: 1010 }}>✕</button>
-      <div style={{ background: '#3d291b', color: '#f1dfb7', maxWidth: '1000px', width: '100%', maxHeight: '90vh', display: 'flex', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 30px 60px rgba(0,0,0,0.5)' }}>
-        <div style={{ flex: 1.2, background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <div
+      id="lightbox"
+      className="active"
+      onClick={(e) => {
+        if (e.target.id === 'lightbox') onClose();
+      }}
+      style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0, 0, 0, 0.98)', backdropFilter: 'blur(20px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: window.innerWidth > 768 ? '2rem' : '1rem', opacity: 1, transition: 'opacity 0.5s ease' }}
+    >
+      {window.innerWidth > 768 && (
+        <button
+          className="close-btn"
+          onClick={onClose}
+          style={{ position: 'absolute', top: '2rem', right: '2rem', background: '#3d291b', border: 'none', color: '#f1dfb7', cursor: 'pointer', zIndex: 1010, borderRadius: '50%', width: '50px', height: '50px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+        >
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" style={{ transition: 'transform 0.3s ease' }}>
+            <path d="M18 6L6 18M6 6l12 12" />
+          </svg>
+        </button>
+      )}
+
+      <div
+        className="lightbox-content"
+        style={{ background: '#3d291b', color: '#f1dfb7', maxWidth: '1000px', width: window.innerWidth > 768 ? '100%' : '100%', maxHeight: '94vh', display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', borderRadius: '8px', overflowY: 'auto', transform: 'scale(1)', transition: 'transform 0.6s cubic-bezier(0.2, 0, 0.2, 1)', boxShadow: '0 40px 100px rgba(0, 0, 0, 0.8)', position: 'relative' }}
+      >
+        {window.innerWidth <= 768 && (
+          <button
+            className="mobile-close-btn"
+            onClick={onClose}
+            style={{ display: 'flex', position: 'absolute', top: '0.5rem', right: '0.5rem', background: '#3d291b', border: 'none', borderRadius: '50%', width: '44px', height: '44px', alignItems: 'center', justifyContent: 'center', backdropFilter: 'blur(4px)', zIndex: 1010, color: '#f1dfb7', cursor: 'pointer' }}
+          >
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+              <path d="M18 6L6 18M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+
+        <div
+          className="lightbox-image-side"
+          style={{ flex: window.innerWidth > 768 ? 1.2 : '0 0 auto', background: '#000', minHeight: window.innerWidth > 768 ? '300px' : 'auto', height: window.innerWidth <= 768 ? '35vh' : 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', borderTopLeftRadius: '8px', borderBottomLeftRadius: window.innerWidth > 768 ? '8px' : 0, borderTopRightRadius: window.innerWidth <= 768 ? '8px' : 0 }}
+        >
           <img src={getImagePath(product.image)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
-        <div style={{ flex: 1, padding: '3rem', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <span style={{ fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.6)', marginBottom: '1rem' }}>{product.collection} • {product.categories.join(', ')}</span>
-          <h2 style={{ fontSize: '2.5rem', fontFamily: '"Forum", serif', marginBottom: '1.5rem' }}>{product.name}</h2>
-          <p style={{ fontStyle: 'italic', opacity: 0.8, lineHeight: 1.6, borderLeft: '2px solid #C5A059', paddingLeft: '1.5rem' }}>Earthy Crafts brings you the finest selection of hand-crafted masterpieces, blending traditional heritage with contemporary elegance.</p>
-          <button style={{ marginTop: '2.5rem', height: '50px', background: '#f1dfb7', color: '#3d291b', border: 'none', borderRadius: '4px', fontWeight: 600, cursor: 'pointer', transition: '0.3s' }}>ENQUIRE PRODUCT</button>
+
+        <div
+          className="lightbox-info-side"
+          style={{ flex: 1, padding: window.innerWidth > 768 ? '3rem' : '1.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: window.innerWidth <= 768 ? 'min-content' : 'auto' }}
+        >
+          <span className="category" style={{ color: '#ffffff', fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', fontWeight: 700, marginBottom: '0.5rem', fontFamily: '"Forum", serif' }}>
+            {product.collection} • {product.categories.join(', ')}
+          </span>
+          <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 2.5rem)', margin: '0.25rem 0 1rem 0', fontFamily: '"Forum", serif' }}>
+            {product.name}
+          </h2>
+          <p style={{ color: '#f1dfb7', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 1.5vw, 1rem)', fontStyle: 'italic', borderLeft: '2px solid #f1dfb7', paddingLeft: '1.25rem' }}>
+            Exquisite hand-painted pottery featuring traditional cobalt pigments and a signature glaze that captures the essence of heritage craftsmanship.
+          </p>
+
+          <div className="lightbox-actions" style={{ display: 'flex', gap: '10px', marginTop: window.innerWidth > 768 ? '2rem' : '1.25rem', width: '100%', flexDirection: window.innerWidth <= 480 ? 'column' : 'row' }}>
+            <button
+              className="btn-enquire"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', height: '48px', fontSize: '16px', fontWeight: 500, cursor: 'pointer', borderRadius: '4px', transition: 'all 0.3s ease', backgroundColor: '#f1dfb7', color: '#3d291b', border: '1px solid #f1dfb7', flex: 1.2 }}
+            >
+              Enquire Product
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+            <button
+              className="btn-share"
+              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', height: '48px', fontSize: '16px', fontWeight: 500, cursor: 'pointer', borderRadius: '4px', transition: 'all 0.3s ease', backgroundColor: 'transparent', color: '#f1dfb7', border: '1px solid #f1dfb7', flex: 1 }}
+            >
+              Share
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="18" cy="5" r="3"></circle>
+                <circle cx="6" cy="12" r="3"></circle>
+                <circle cx="18" cy="19" r="3"></circle>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -150,7 +150,7 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
       onClick={(e) => {
         if (e.target.id === 'lightbox') onClose();
       }}
-      style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0, 0, 0, 0.98)', backdropFilter: 'blur(20px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', opacity: 1, transition: 'opacity 0.5s ease' }}
+      style={{ position: 'fixed', inset: 0, zIndex: 1000, background: 'rgba(0, 0, 0, 0.98)', backdropFilter: 'blur(20px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: window.innerWidth > 768 ? '2rem' : '1rem', opacity: 1, transition: 'opacity 0.5s ease' }}
     >
       {window.innerWidth > 768 && (
         <button
@@ -166,7 +166,7 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
 
       <div
         className="lightbox-content"
-        style={{ background: '#3d291b', color: '#f1dfb7', maxWidth: '900px', width: '95%', maxHeight: '90vh', display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', borderRadius: '8px', overflowY: 'auto', transform: 'scale(1)', transition: 'transform 0.6s cubic-bezier(0.2, 0, 0.2, 1)', boxShadow: '0 40px 100px rgba(0, 0, 0, 0.8)', position: 'relative' }}
+        style={{ background: '#3d291b', color: '#f1dfb7', maxWidth: '900px', width: window.innerWidth > 768 ? '95%' : '100%', maxHeight: '94vh', display: 'flex', flexDirection: window.innerWidth > 768 ? 'row' : 'column', borderRadius: '8px', overflowY: 'auto', transform: 'scale(1)', transition: 'transform 0.6s cubic-bezier(0.2, 0, 0.2, 1)', boxShadow: '0 40px 100px rgba(0, 0, 0, 0.8)', position: 'relative' }}
       >
         {window.innerWidth <= 768 && (
           <button
@@ -182,26 +182,26 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
 
         <div
           className="lightbox-image-side"
-          style={{ flex: window.innerWidth > 768 ? 1.2 : '0 0 40%', background: '#000', minHeight: window.innerWidth > 768 ? '300px' : 'auto', height: window.innerWidth <= 768 ? '40%' : 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', borderTopLeftRadius: '8px', borderBottomLeftRadius: window.innerWidth > 768 ? '8px' : 0, borderTopRightRadius: window.innerWidth <= 768 ? '8px' : 0 }}
+          style={{ flex: window.innerWidth > 768 ? 1.2 : '0 0 auto', background: '#000', minHeight: window.innerWidth > 768 ? '300px' : 'auto', height: window.innerWidth <= 768 ? '35vh' : 'auto', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', borderTopLeftRadius: '8px', borderBottomLeftRadius: window.innerWidth > 768 ? '8px' : 0, borderTopRightRadius: window.innerWidth <= 768 ? '8px' : 0 }}
         >
           <img src={getImagePath(product.image)} alt={product.name} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
         </div>
 
         <div
           className="lightbox-info-side"
-          style={{ flex: window.innerWidth > 768 ? 1 : '0 0 60%', padding: window.innerWidth > 768 ? '3rem' : '1.5rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', height: window.innerWidth <= 768 ? '60%' : 'auto', overflowY: window.innerWidth <= 768 ? 'auto' : 'visible' }}
+          style={{ flex: 1, padding: window.innerWidth > 768 ? '3rem' : '1.25rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', minHeight: window.innerWidth <= 768 ? 'min-content' : 'auto' }}
         >
           <span className="category" style={{ color: '#ffffff', fontSize: '10px', letterSpacing: '0.3em', textTransform: 'uppercase', fontWeight: 700, marginBottom: '0.5rem', fontFamily: '"Forum", serif' }}>
             {product.categories.join(', ')}
           </span>
-          <h2 style={{ fontSize: 'clamp(1.5rem, 4vw, 2.2rem)', margin: '0.5rem 0 1.5rem 0', fontFamily: '"Forum", serif' }}>
+          <h2 style={{ fontSize: 'clamp(1.4rem, 4vw, 2.2rem)', margin: '0.25rem 0 1rem 0', fontFamily: '"Forum", serif' }}>
             {product.name}
           </h2>
           <p style={{ color: '#f1dfb7', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 1.5vw, 1rem)', fontStyle: 'italic', borderLeft: '2px solid #f1dfb7', paddingLeft: '1.25rem' }}>
             Exquisite hand-painted pottery featuring traditional cobalt pigments and a signature glaze that captures the essence of heritage craftsmanship.
           </p>
 
-          <div className="lightbox-actions" style={{ display: 'flex', gap: '12px', marginTop: '2rem', width: '100%', flexDirection: window.innerWidth <= 480 ? 'column' : 'row' }}>
+          <div className="lightbox-actions" style={{ display: 'flex', gap: '10px', marginTop: window.innerWidth > 768 ? '2rem' : '1.25rem', width: '100%', flexDirection: window.innerWidth <= 480 ? 'column' : 'row' }}>
             <button
               className="btn-enquire"
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', height: '48px', fontSize: '16px', fontWeight: 500, cursor: 'pointer', borderRadius: '4px', transition: 'all 0.3s ease', backgroundColor: '#f1dfb7', color: '#3d291b', border: '1px solid #f1dfb7', flex: 1.2 }}
