@@ -236,6 +236,15 @@ const AllProducts = () => {
     setFilteredProducts(filtered);
   }, [searchQuery, selectedCategory, selectedCollection]);
 
+  useEffect(() => {
+    if (selectedProduct) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => { document.body.style.overflow = 'auto'; };
+  }, [selectedProduct]);
+
   return (
     <div className={`w-full min-h-screen bg-[#0c0c0c] text-[#FDF5E6] pt-32 pb-20 transition-opacity duration-1000 ${isPageVisible ? 'is-visible' : ''}`}>
       <div className="max-w-[1400px] mx-auto px-8 md:px-[60px]">
