@@ -12,17 +12,22 @@ const ProductCard = ({ product, index, onOpenLightbox, getImagePath }) => {
   const currentY = useRef(0);
   const targetX = useRef(0);
   const targetY = useRef(0);
-  const currentEntranceY = useRef(30);
-  const targetEntranceY = useRef(30);
+  const currentEntranceY = useRef(50);
+  const targetEntranceY = useRef(50);
+  const currentScale = useRef(0.95);
+  const targetScale = useRef(0.95);
   const requestRef = useRef();
 
   const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   useEffect(() => {
+    // Stagger based on position in current set, capped differently for smoother flow
+    const staggerIndex = index % 10;
     const timer = setTimeout(() => {
       setIsVisible(true);
       targetEntranceY.current = 0;
-    }, Math.min(index * 50, 400));
+      targetScale.current = 1;
+    }, staggerIndex * 60);
     return () => clearTimeout(timer);
   }, [index]);
 
@@ -31,9 +36,11 @@ const ProductCard = ({ product, index, onOpenLightbox, getImagePath }) => {
     const animate = () => {
       currentX.current = lerp(currentX.current, targetX.current, 0.05);
       currentY.current = lerp(currentY.current, targetY.current, 0.05);
-      currentEntranceY.current = lerp(currentEntranceY.current, targetEntranceY.current, 0.05);
+      currentEntranceY.current = lerp(currentEntranceY.current, targetEntranceY.current, 0.06);
+      currentScale.current = lerp(currentScale.current, targetScale.current, 0.06);
+      
       if (cardRef.current) {
-        cardRef.current.style.transform = `translateY(${currentEntranceY.current}px) perspective(2000px) rotateX(${currentY.current}deg) rotateY(${currentX.current}deg)`;
+        cardRef.current.style.transform = `translateY(${currentEntranceY.current}px) scale(${currentScale.current}) perspective(2000px) rotateX(${currentY.current}deg) rotateY(${currentX.current}deg)`;
       }
       requestRef.current = requestAnimationFrame(animate);
     };
@@ -207,6 +214,7 @@ const AllProducts = () => {
   const [selectedCollection, setSelectedCollection] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(10);
 
   const categories = ['All', ...new Set(productsData.products.flatMap(p => p.categories))];
   const collections = ['All', ...new Set(productsData.products.map(p => p.collection))];
@@ -234,6 +242,7 @@ const AllProducts = () => {
       return matchesSearch && matchesCategory && matchesCollection;
     });
     setFilteredProducts(filtered);
+    setVisibleCount(10); // Reset to 10 whenever filters/search change
   }, [searchQuery, selectedCategory, selectedCollection]);
 
   useEffect(() => {
@@ -328,7 +337,7 @@ const AllProducts = () => {
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
           {filteredProducts.length > 0 ? (
-            filteredProducts.map((product, i) => (
+            filteredProducts.slice(0, visibleCount).map((product, i) => (
               <ProductCard
                 key={product.id}
                 product={product}
@@ -343,6 +352,18 @@ const AllProducts = () => {
             </div>
           )}
         </div>
+
+        {/* Load More Button */}
+        {filteredProducts.length > visibleCount && (
+          <div className="mt-20 flex justify-center editorial-reveal" style={{ transitionDelay: '400ms' }}>
+            <button
+              onClick={() => setVisibleCount(prev => prev + 5)}
+              className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-1 hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-2 transition-all duration-200"
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </div>
 
       <Lightbox
