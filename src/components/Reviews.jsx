@@ -64,9 +64,15 @@ const Reviews = () => {
                 }
                 @media (min-width: 768px) {
                     .review-card {
-                        width: 300px;
-                        height: 420px;
+                        width: 290px;
+                        height: 400px;
                         margin-bottom: 0;
+                    }
+                }
+                @media (min-width: 1024px) {
+                    .review-card {
+                        width: 280px;
+                        height: 380px;
                     }
                 }
                 .review-card:hover {
@@ -95,7 +101,7 @@ const Reviews = () => {
                 }
             `}</style>
 
-            <div className={`max-w-full mx-auto ${isVisible ? 'is-visible' : ''} flex flex-col items-center h-full pt-32 md:pt-28`}>
+            <div className={`max-w-full mx-auto ${isVisible ? 'is-visible' : ''} flex flex-col items-center h-full pt-32 md:pt-44 lg:pt-28`}>
                 {/* Header - Very Compact on desktop */}
                 <div className="text-center mb-8 md:mb-5 editorial-reveal" style={{ transitionDelay: '100ms' }}>
                     <div className="flex items-center justify-center space-x-3 mb-1">
@@ -109,7 +115,7 @@ const Reviews = () => {
                 </div>
 
                 {/* Gallery */}
-                <div className="w-full flex list-none flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-center items-center md:items-stretch gap-6 md:gap-8 pt-5 pb-20 md:pb-32 lg:pb-0 px-4 md:max-w-4xl lg:max-w-full mx-auto md:overflow-visible lg:overflow-x-auto hide-scrollbar relative z-10">
+                <div className="w-full flex list-none flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-center items-center md:items-stretch gap-6 md:gap-8 lg:gap-5 pt-5 pb-20 md:pb-16 lg:pb-5 px-4 md:max-w-4xl lg:max-w-7xl mx-auto md:overflow-visible lg:overflow-hidden relative z-10">
                     {reviews.map((review, index) => (
                         <div
                             key={review.id}
