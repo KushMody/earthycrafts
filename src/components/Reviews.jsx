@@ -44,7 +44,7 @@ const Reviews = () => {
     ];
 
     return (
-        <div className={`w-full min-h-screen md:h-screen bg-[#080808] flex flex-col justify-start px-4 md:px-10 font-['Forum',serif] transition-opacity duration-1000 overflow-y-auto md:overflow-hidden scroll-smooth ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+        <div className={`w-full min-h-screen lg:h-screen bg-[#080808] flex flex-col justify-start px-4 md:px-10 font-['Forum',serif] transition-opacity duration-1000 overflow-y-auto lg:overflow-hidden scroll-smooth ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
             <style>{`
                 .review-card {
                     background: rgba(255, 255, 255, 0.02);
@@ -109,7 +109,7 @@ const Reviews = () => {
                 </div>
 
                 {/* Gallery */}
-                <div className="w-full flex list-none flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-center items-center md:items-stretch gap-6 md:gap-8 pt-5 pb-10 md:pb-12 px-4 md:max-w-4xl mx-auto md:overflow-visible hide-scrollbar relative z-10">
+                <div className="w-full flex list-none flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row lg:justify-center items-center md:items-stretch gap-6 md:gap-8 pt-5 pb-20 md:pb-32 lg:pb-0 px-4 md:max-w-4xl lg:max-w-full mx-auto md:overflow-visible lg:overflow-x-auto hide-scrollbar relative z-10">
                     {reviews.map((review, index) => (
                         <div
                             key={review.id}

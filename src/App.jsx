@@ -146,7 +146,7 @@ function App() {
                 </div>
               } />
               <Route path="/reviews" element={
-                <div className="w-full min-h-screen md:h-screen relative overflow-y-auto md:overflow-hidden">
+                <div className="w-full min-h-screen lg:h-screen relative overflow-y-auto lg:overflow-hidden">
                   <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
                   <Reviews />
                 </div>
