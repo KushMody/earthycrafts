@@ -964,6 +964,16 @@
             "image": "/Images/Products/Mosaic Art/Home/Exquisite Mosaic Octopus Art.webp"
         },
         {
+            "id": "mos-7",
+            "name": "Shreenathji Mosaic Tile Art",
+            "collection": "Mosaic Art",
+            "categories": [
+                "Home",
+                "Outdoor"
+            ],
+            "image": "/Images/Products/Mosaic Art/Home/Shreenathji_Mosaic_Tile_Art.JPG"
+        },
+        {
             "id": "ar-1",
             "name": "Grand Agra Red Sandstone Pavilion",
             "collection": "Sandstone",
@@ -2066,6 +2076,42 @@
             "image": "/Images/Products/White Marble/Home/White Marble Bird Sculpture.jpg"
         },
         {
+            "id": "wm-102",
+            "name": "Pink Marble Leaf Sculpture",
+            "collection": "Marbles",
+            "categories": [
+                "Home"
+            ],
+            "image": "/Images/Products/White Marble/Home/Pink_Marble_Leaf_Sculpture.JPG"
+        },
+        {
+            "id": "wm-103",
+            "name": "White Marble Vase",
+            "collection": "Marbles",
+            "categories": [
+                "Home"
+            ],
+            "image": "/Images/Products/White Marble/Home/White_Marble_Vase.JPG"
+        },
+        {
+            "id": "wm-104",
+            "name": "Golden Halo Vase",
+            "collection": "Marbles",
+            "categories": [
+                "Home"
+            ],
+            "image": "/Images/Products/White Marble/Home/Golden_Halo_Vase.JPG"
+        },
+        {
+            "id": "wm-105",
+            "name": "Marble Modern Lamp",
+            "collection": "Marbles",
+            "categories": [
+                "Home"
+            ],
+            "image": "/Images/Products/White Marble/Home/Marble_Modern_Lamp.JPG"
+        },
+        {
             "id": "ss-1",
             "name": "Beslana and Sandstone Pedestal Washbasin Set",
             "collection": "Sandstone",
@@ -3116,6 +3162,15 @@
                 "Outdoor"
             ],
             "image": "/Images/Products/SandStone/Outdoor/Textured Sandstone Pillars.jpg"
+        },
+        {
+            "id": "ss-116",
+            "name": "Sandstone Sculpted Vase",
+            "collection": "Sandstone",
+            "categories": [
+                "Outdoor"
+            ],
+            "image": "/Images/Products/SandStone/Outdoor/Sand_Stone_Sculpted_Vase.JPG"
         }
     ]
 }
