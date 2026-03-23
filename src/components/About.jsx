@@ -42,6 +42,23 @@ const About = () => {
             content: "Since our founding we have walked the path of blending ancient techniques with contemporary vision.",
             subContent: "Our mission has always been to celebrate heritage without compromising innovation, to create art that resonates with the modern collector.",
             quote: '"Resonating through every stone."'
+        },
+        location: {
+            title: "Location",
+            subtitle: "Jaipur",
+            content: "Address: J-288, Murtikala Zone, Sarna Doongar, Jaipur, 302012",
+            quote: (
+                <div className="flex flex-col items-start mt-4">
+                    <a
+                        href="https://maps.app.goo.gl/U7o9W1R29xtgEGPZ7?g_st=aw"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-1 hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-2 transition-all duration-200"
+                    >
+                        Get Directions
+                    </a>
+                </div>
+            )
         }
     };
 
@@ -156,6 +173,13 @@ const About = () => {
                                 >
                                     OUR MISSION
                                 </button>
+
+                                <button
+                                    onClick={() => handleOpenModal('location')}
+                                    className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-[4px] hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-[8px] transition-all duration-200"
+                                >
+                                    Locate Us
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -180,14 +204,14 @@ const About = () => {
 
                         <div className="space-y-4">
                             <div>
-                                <p className="uppercase text-[#c29d59] tracking-[0.35em] text-[9px] md:text-xs font-semibold mb-2">Narrative</p>
+                                <p className="uppercase text-[#c29d59] tracking-[0.35em] text-[10px] md:text-xs font-semibold mb-2">{modalContent[activeModal].subtitle || 'Narrative'}</p>
                                 <h3 className="text-[#efe7d2] font-['Forum',serif] text-3xl md:text-5xl leading-[1.05] uppercase tracking-tight">{modalContent[activeModal].title}</h3>
                                 <p className="mt-3 text-[#f0e9d8] text-sm md:text-base leading-relaxed opacity-90">{modalContent[activeModal].subContent}</p>
                             </div>
 
                             <div className="border-t border-white/10 pt-4">
                                 <p className="text-[#efe7d2] text-base md:text-lg leading-relaxed">{modalContent[activeModal].content}</p>
-                                <p className="mt-4 text-[#e8d8a4] text-xl md:text-2xl italic font-semibold leading-snug">{modalContent[activeModal].quote}</p>
+                                <div className="mt-4 text-[#e8d8a4] text-xl md:text-2xl italic font-semibold leading-snug">{modalContent[activeModal].quote}</div>
                             </div>
                         </div>
                     </div>
