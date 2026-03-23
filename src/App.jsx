@@ -9,6 +9,7 @@ import SingleCollection from './components/SingleCollection'
 import Home from './components/Home'
 import AllProducts from './components/AllProducts'
 import FloatingShopButton from './components/FloatingShopButton'
+import Reviews from './components/Reviews'
 import { Navbar, MobileMenu } from './components/Navbar'
 import Loader from './components/Loader'
 import { preloadAssets } from './utils/preloader';
@@ -142,6 +143,12 @@ function App() {
                 <div className="w-full min-h-screen md:h-screen relative md:overflow-hidden">
                   <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
                   <About />
+                </div>
+              } />
+              <Route path="/reviews" element={
+                <div className="w-full min-h-screen md:h-screen relative overflow-y-auto md:overflow-hidden">
+                  <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+                  <Reviews />
                 </div>
               } />
             </Routes>
