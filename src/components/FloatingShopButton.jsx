@@ -76,7 +76,7 @@ const FloatingButton = ({ icon, label, subLabel, targetPath }) => {
             initial={{ opacity: 0, x: 100 }}
             animate={{
                 opacity: 1,
-                x: isExpanded ? 0 : (isMobile ? "calc(100% - 62px)" : "calc(100% - 74px)")
+                x: isExpanded ? 0 : (isMobile ? "calc(100% - 70px)" : "calc(100% - 100px)")
             }}
             exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
