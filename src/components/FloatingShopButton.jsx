@@ -10,13 +10,20 @@ const FloatingButton = ({ icon, label, subLabel, targetPath }) => {
     const lastInteractionTime = useRef(0);
     const pointerType = useRef('');
 
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
     useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
         const checkTouch = () => {
             setIsTouch('ontouchstart' in window || navigator.maxTouchPoints > 0);
         };
         checkTouch();
         window.addEventListener('touchstart', checkTouch, { once: true });
-        return () => window.removeEventListener('touchstart', checkTouch);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+            window.removeEventListener('touchstart', checkTouch);
+        };
     }, []);
 
     useEffect(() => {
@@ -69,7 +76,7 @@ const FloatingButton = ({ icon, label, subLabel, targetPath }) => {
             initial={{ opacity: 0, x: 100 }}
             animate={{
                 opacity: 1,
-                x: isExpanded ? 0 : "calc(100% - 70px)"
+                x: isExpanded ? 0 : (isMobile ? "calc(100% - 62px)" : "calc(100% - 74px)")
             }}
             exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -134,7 +141,7 @@ const FloatingShopButton = () => {
                     />
                 )}
 
-                {!isCategoriesPage && !isAllProductsPage && (
+                {!isAllProductsPage && (
                     <FloatingButton
                         key="products"
                         targetPath="/all-products"
