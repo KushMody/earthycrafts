@@ -176,6 +176,17 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
             Exquisite hand-painted pottery featuring traditional cobalt pigments and a signature glaze that captures the essence of heritage craftsmanship.
           </p>
 
+          {product.dimensions && (
+            <div style={{ marginTop: '1.5rem', borderTop: '1px solid rgba(241, 223, 183, 0.1)', paddingTop: '1rem' }}>
+              <h4 style={{ fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#C5A059', marginBottom: '0.4rem', fontWeight: 700, fontFamily: '"Forum", serif' }}>
+                Dimensions
+              </h4>
+              <p style={{ fontSize: '1.1rem', color: '#f1dfb7', fontFamily: '"Forum", serif' }}>
+                {product.dimensions}
+              </p>
+            </div>
+          )}
+
           <div className="lightbox-actions" style={{ display: 'flex', gap: '10px', marginTop: window.innerWidth > 768 ? '2rem' : '1.25rem', width: '100%', flexDirection: window.innerWidth <= 480 ? 'column' : 'row' }}>
             <button
               className="btn-enquire"
