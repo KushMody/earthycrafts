@@ -21,13 +21,13 @@ const ProductCard = ({ product, index, onOpenLightbox, getImagePath }) => {
   const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   useEffect(() => {
-    // Stagger based on position in current set, capped differently for smoother flow
-    const staggerIndex = index % 10;
+    // Stagger based on position in current set, using modulo 8 for consistent batches
+    const staggerIndex = index % 8;
     const timer = setTimeout(() => {
       setIsVisible(true);
       targetEntranceY.current = 0;
       targetScale.current = 1;
-    }, staggerIndex * 60);
+    }, staggerIndex * 80);
     return () => clearTimeout(timer);
   }, [index]);
 
@@ -225,7 +225,7 @@ const AllProducts = () => {
   const [selectedCollection, setSelectedCollection] = useState('All');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [visibleCount, setVisibleCount] = useState(10);
+  const [visibleCount, setVisibleCount] = useState(20);
 
   const categories = ['All', ...new Set(productsData.products.flatMap(p => p.categories))];
   const collections = ['All', ...new Set(productsData.products.map(p => p.collection))];
@@ -253,7 +253,7 @@ const AllProducts = () => {
       return matchesSearch && matchesCategory && matchesCollection;
     });
     setFilteredProducts(filtered);
-    setVisibleCount(10); // Reset to 10 whenever filters/search change
+    setVisibleCount(20); // Reset to 20 whenever filters/search change
   }, [searchQuery, selectedCategory, selectedCollection]);
 
   useEffect(() => {
@@ -366,12 +366,45 @@ const AllProducts = () => {
 
         {/* Load More Button */}
         {filteredProducts.length > visibleCount && (
-          <div className="mt-20 flex justify-center editorial-reveal" style={{ transitionDelay: '400ms' }}>
+          <div className="mt-20 flex justify-center editorial-reveal" style={{ transitionDelay: '400ms', paddingBottom: '4rem' }}>
             <button
-              onClick={() => setVisibleCount(prev => prev + 5)}
-              className="px-8 md:px-12 py-3 md:py-4 bg-black/40 hover:cursor-pointer backdrop-blur-md border border-white/20 text-[#efe7d2] font-['Forum',serif] text-xs md:text-sm tracking-[0.2em] md:tracking-[0.25em] uppercase rounded-sm shadow-[0_8px_0_#8c703b,0_15px_20px_rgba(0,0,0,0.5)] hover:shadow-[0_4px_0_#8c703b,0_8px_15px_rgba(0,0,0,0.4)] hover:translate-y-1 hover:bg-[#c29d59] hover:text-[#080808] hover:border-[#c29d59] active:shadow-[0_0px_0_#8c703b,0_0px_0_rgba(0,0,0,0.4)] active:translate-y-2 transition-all duration-200"
+              onClick={() => setVisibleCount(prev => prev + 8)}
+              className="show-more-btn"
+              style={{
+                background: '#0a0a0a',
+                color: '#efe7d2',
+                border: '1px solid rgba(197, 160, 89, 0.3)',
+                padding: '1.2rem 3.5rem',
+                fontFamily: '"Forum", serif',
+                fontSize: '1.1rem',
+                letterSpacing: '0.25em',
+                textTransform: 'uppercase',
+                cursor: 'pointer',
+                position: 'relative',
+                transition: 'all 0.4s cubic-bezier(0.2, 0, 0.2, 1)',
+                boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+                borderRadius: '2px',
+                overflow: 'hidden'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = '#C5A059';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(197, 160, 89, 0.3)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             >
-              Show More
+              SHOW MORE
+              <div style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                width: '100%',
+                height: '4px',
+                background: '#C5A059',
+                boxShadow: '0 -2px 10px rgba(197, 160, 89, 0.3)'
+              }}></div>
             </button>
           </div>
         )}

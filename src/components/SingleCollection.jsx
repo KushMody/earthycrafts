@@ -21,11 +21,12 @@ const ProductCard = ({ product, index, onOpenLightbox, getImagePath, targetCateg
   const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
   useEffect(() => {
-    // Staggered entrance
+    // Staggered entrance based on position in current set for smoothness
+    const delayIndex = index % 8; 
     const timer = setTimeout(() => {
       setIsVisible(true);
       targetEntranceY.current = 0;
-    }, Math.min(index * 100, 600));
+    }, delayIndex * 100);
 
     return () => clearTimeout(timer);
   }, [index]);
@@ -251,6 +252,7 @@ const SingleCollection = () => {
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(20);
 
   // Map URL params back to the collection/category strings in data.json
   const idToCollectionMap = {
@@ -321,6 +323,7 @@ const SingleCollection = () => {
 
     console.log(`Filtered products for ${collectionName} [${categoryParam || 'All'}]: ${matches.length}`);
     setFilteredProducts(matches);
+    setVisibleCount(20); // Reset count when filters change
   }, [id, categoryParam, collectionName]);
 
   useEffect(() => {
@@ -351,9 +354,9 @@ const SingleCollection = () => {
         )}
       </div>
 
-      <div style={{ maxWidth: '1400px', width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2.5rem', padding: '4rem 2rem', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1400px', width: '100%', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '2.5rem', padding: '4rem 2rem 0 2rem', margin: '0 auto' }}>
         {filteredProducts.length > 0 ? (
-          filteredProducts.map((product, i) => (
+          filteredProducts.slice(0, visibleCount).map((product, i) => (
             <ProductCard
               key={product.id}
               product={product}
@@ -369,6 +372,50 @@ const SingleCollection = () => {
           </div>
         )}
       </div>
+
+      {filteredProducts.length > visibleCount && (
+        <div style={{ display: 'flex', justifyContent: 'center', padding: '4rem 2rem 6rem 2rem' }}>
+          <button
+            onClick={() => setVisibleCount(prev => prev + 8)}
+            className="show-more-btn"
+            style={{
+              background: '#0a0a0a',
+              color: '#FDF5E6',
+              border: '1px solid rgba(197, 160, 89, 0.3)',
+              padding: '1.2rem 3.5rem',
+              fontFamily: '"Forum", serif',
+              fontSize: '1.1rem',
+              letterSpacing: '0.25em',
+              textTransform: 'uppercase',
+              cursor: 'pointer',
+              position: 'relative',
+              transition: 'all 0.4s cubic-bezier(0.2, 0, 0.2, 1)',
+              boxShadow: '0 20px 40px rgba(0,0,0,0.3)',
+              borderRadius: '2px',
+              overflow: 'hidden'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.borderColor = '#C5A059';
+              e.currentTarget.style.transform = 'translateY(-2px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(197, 160, 89, 0.3)';
+              e.currentTarget.style.transform = 'translateY(0)';
+            }}
+          >
+            SHOW MORE
+            <div style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '100%',
+              height: '4px',
+              background: '#C5A059',
+              boxShadow: '0 -2px 10px rgba(197, 160, 89, 0.3)'
+            }}></div>
+          </button>
+        </div>
+      )}
 
       <Lightbox
         product={selectedProduct}
