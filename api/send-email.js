@@ -69,7 +69,7 @@ export default async function handler(req, res) {
 
       const { data, error } = await resend.emails.send({
         from: "EarthyCrafts <noreply@yourdomain.com>",
-        to: "gamingbhai0710@gmail.com",
+        to: "agrawalanuj97@gmail.com",
         subject: "EarthyCrafts Website Inquiry Form",
         html: htmlContent,
         attachments,
