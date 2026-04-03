@@ -247,7 +247,7 @@ const Contact = () => {
                 <div className="text-red-500 text-center mt-4 text-xs space-y-1">
                   <p>Oops! Something went wrong.</p>
                   <p className="font-bold text-[10px] uppercase tracking-wider">{errorMessage}</p>
-                  <p className="opacity-70 text-[10px]">Note: Email delivery only works in production (e.g., Vercel) as local Vite doesn't run the API folder.</p>
+                  <p className="opacity-70 text-[10px]">Note: Ensure your local backend (npm run backend) is running to test emails locally.</p>
                 </div>
               )}
             </div>

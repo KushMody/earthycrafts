@@ -189,7 +189,13 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
             <span>Earthy</span>
             <span className="text-[#c29d59]">Crafts</span>
           </h1>
-          <div className="w-[1px] h-24 bg-gradient-to-b from-[#c29d59] to-transparent mx-auto mt-12"></div>
+          <div 
+            className="flex flex-col items-center mt-12 editorial-reveal" 
+            style={{ transitionDelay: '800ms' }}
+          >
+            <div className="w-[1px] h-16 md:h-24 bg-gradient-to-b from-[#c29d59] to-transparent animate-breath"></div>
+            <span className="text-[#c29d59]/60 font-['Plus_Jakarta_Sans',sans-serif] text-[9px] md:text-[10px] tracking-[0.6em] md:tracking-[0.8em] uppercase mt-6 transition-colors duration-700">Scroll Down</span>
+          </div>
         </div>
       </section>
 
@@ -203,14 +209,13 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
           <div className="flex-none text-center mb-4 md:mb-5 w-full editorial-reveal" style={{ transitionDelay: '200ms' }}>
             <div className="flex items-center justify-center space-x-4 md:space-x-6 mb-1 md:mb-5">
               <div className="h-[1px] w-8 md:w-12 bg-[#c29d59]/30"></div>
-              <span className="text-[#c29d59] tracking-[0.4em] md:tracking-[0.6em] font-['Forum',serif] text-[10px] md:text-xs uppercase opacity-80">Our Curation</span>
+              <span className="text-[#c29d59] tracking-[0.5em] md:tracking-[0.6em] font-['Forum',serif] text-[10px] md:text-xs uppercase opacity-80">Our Curation</span>
               <div className="h-[1px] w-8 md:w-12 bg-[#c29d59]/30"></div>
             </div>
             <h2 className="text-[#efe7d2] font-['Forum',serif] text-3xl md:text-5xl lg:text-5xl tracking-tight uppercase leading-[0.9] md:leading-[0.8] flex flex-col items-center drop-shadow-2xl">
-              <span>Timeless</span>
-              <span>Stone Artistry</span>
+              <p className="text-4xl md:text-5xl lg:text-7xl font-['Forum',serif] uppercase leading-[0.9] drop-shadow-xl"><span className="text-[#c29d59]">Timeless </span><span>Stone Artistry</span></p>
             </h2>
-            <p className="text-[#efe7d2]/40 font-['Forum',serif] text-sm md:text-lg max-w-lg mx-auto mt-2 md:mt-4 italic hidden md:block">
+            <p className="text-[#efe7d2]/40  md:text-lg lg:text-xl font-['Forum',serif] leading-relaxed max-w-xl mx-auto mt-2 md:mt-4 italic hidden md:block">
               "Every piece is hand-carved to perfection, preserving the heritage of master craftsmen."
             </p>
           </div>
@@ -269,12 +274,12 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
           </div>
 
         </div>
-      </section>
+      </section >
 
       {/* 3. NARRATIVE */}
-      <section className={`snap-section bg-[#0c0c0c] border-t border-white/5 ${activeSection === 2 ? 'section-visible' : ''}`}>
+      < section className={`snap-section bg-[#0c0c0c] border-t border-white/5 ${activeSection === 2 ? 'section-visible' : ''}`}>
         <div className="grid md:grid-cols-2 h-full">
-          <div className="relative pt-20 pb-4 md:pt-24 p-6 md:p-12 lg:p-32 flex flex-col justify-center">
+          <Link to="/about-us" className="relative pt-20 pb-4 md:pt-24 p-6 md:p-12 lg:p-32 flex flex-col justify-center group/narrative cursor-pointer">
             <div className="relative z-10 editorial-reveal" style={{ transitionDelay: '200ms' }}>
               <span className="text-[#c29d59] text-[10px] md:text-xs tracking-[0.5em] mb-4 md:mb-8 block uppercase opacity-70">The Process</span>
               <h2 className="text-4xl md:text-5xl lg:text-7xl font-['Forum',serif] uppercase leading-[0.9] mb-4 md:mb-10 flex flex-col items-start drop-shadow-xl">
@@ -284,12 +289,12 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
               <p className="text-[#efe7d2]/60 text-base md:text-lg lg:text-xl font-['Forum',serif] leading-relaxed max-w-xl mb-6 md:mb-16 italic">
                 "We don't just carve stone; we release the spirit within."
               </p>
-              <Link to="/about-us" className="inline-flex items-center space-x-8 group">
+              <div className="inline-flex items-center space-x-8">
                 <span className="text-[#c29d59] text-[10px] tracking-[0.6em] uppercase">Explore Heritage</span>
-                <div className="w-16 h-[1px] bg-[#c29d59]/40 group-hover:w-32 group-hover:bg-[#c29d59] transition-all duration-700"></div>
-              </Link>
+                <div className="w-16 h-[1px] bg-[#c29d59]/40 group-hover/narrative:w-32 group-hover/narrative:bg-[#c29d59] transition-all duration-700"></div>
+              </div>
             </div>
-          </div>
+          </Link>
           <div className="relative overflow-hidden group min-h-[30vh] md:min-h-0">
             <img ref={maskImgRef} src={aboutImg} alt="Craft" className="absolute inset-0 w-full h-full object-cover opacity-30 grayscale hover:grayscale-0 transition-all duration-1000" style={{ clipPath: 'inset(40% 0 40% 0)' }} />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
@@ -302,10 +307,11 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
             </div>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* 4. INVITATION */}
-      <section className={`snap-section relative flex items-center justify-center bg-black ${activeSection === 3 ? 'section-visible' : ''}`}>
+      < section className={`snap-section relative flex items-center justify-center bg-black ${activeSection === 3 ? 'section-visible' : ''}`}>
+        <Link to="/contact-us" className="absolute inset-0 z-20 cursor-pointer group/invitation"></Link>
         <div className="absolute inset-0 z-0 opacity-40">
           <img ref={invitationImgRef} src={contactImg} alt="Vibe" className="w-full h-full object-cover contrast-125" style={{ clipPath: 'inset(20% 0 20% 0)' }} />
           <div className="absolute inset-0 bg-black/40"></div>
@@ -317,17 +323,17 @@ const Home = ({ isMenuOpen, setIsMenuOpen }) => {
             <span>Start Your</span>
             <span className="text-[#c29d59]">Gallery</span>
           </h2>
-          <Link to="/contact-us" className="group flex flex-col items-center">
+          <div className="flex flex-col items-center">
             <span className="text-[#c29d59] text-xs md:text-xs tracking-[0.6em] md:tracking-[0.8em] mb-6 uppercase">Get A Custom Quote</span>
-            <div className="w-16 md:w-32 h-[1px] bg-[#c29d59]/50 group-hover:bg-[#c29d59] group-hover:w-64 transition-all duration-1000"></div>
-          </Link>
+            <div className="w-16 md:w-32 h-[1px] bg-[#c29d59]/50 group-hover/invitation:bg-[#c29d59] group-hover/invitation:w-64 transition-all duration-1000"></div>
+          </div>
         </div>
 
         <div className="absolute bottom-10 left-0 w-full text-center text-white/5 text-[10px] tracking-[1.5em] uppercase pointer-events-none">
           Fine Stone Artisans • Earthy Crafts Studio
         </div>
-      </section>
-    </div>
+      </section >
+    </div >
   )
 }
 

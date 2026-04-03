@@ -7,10 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "backend": "node server.js"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1",
     "formidable": "^3.5.4",
     "framer-motion": "^12.38.0",
     "react": "^19.2.0",

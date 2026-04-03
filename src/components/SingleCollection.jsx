@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useParams, Link, useLocation } from 'react-router-dom';
+import { useParams, Link, useLocation, useSearchParams } from 'react-router-dom';
 import productsData from '../data.json';
 
 const ProductCard = ({ product, index, onOpenLightbox, getImagePath, targetCategoryName }) => {
@@ -22,7 +22,7 @@ const ProductCard = ({ product, index, onOpenLightbox, getImagePath, targetCateg
 
   useEffect(() => {
     // Staggered entrance based on position in current set for smoothness
-    const delayIndex = index % 8; 
+    const delayIndex = index % 8;
     const timer = setTimeout(() => {
       setIsVisible(true);
       targetEntranceY.current = 0;
@@ -142,7 +142,22 @@ const ProductCard = ({ product, index, onOpenLightbox, getImagePath, targetCateg
 };
 
 const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
+  const [shareText, setShareText] = useState('Share');
   if (!isOpen || !product) return null;
+
+  const handleShare = async () => {
+    // Generate specialized URL with product ID
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareUrl = `${baseUrl}?product=${product.id}`;
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setShareText('Link Copied!');
+      setTimeout(() => setShareText('Share'), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
   return (
     <div
@@ -214,21 +229,23 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
           )}
 
           <div className="lightbox-actions" style={{ display: 'flex', gap: '10px', marginTop: window.innerWidth > 768 ? '2rem' : '1.25rem', width: '100%', flexDirection: window.innerWidth <= 480 ? 'column' : 'row' }}>
-            <button
+            <Link
+              to="/contact-us"
               className="btn-enquire"
-              style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', height: '48px', fontSize: '16px', fontWeight: 500, cursor: 'pointer', borderRadius: '4px', transition: 'all 0.3s ease', backgroundColor: '#f1dfb7', color: '#3d291b', border: '1px solid #f1dfb7', flex: 1.2 }}
+              style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', height: '48px', fontSize: '16px', fontWeight: 500, cursor: 'pointer', borderRadius: '4px', transition: 'all 0.3s ease', backgroundColor: '#f1dfb7', color: '#3d291b', border: '1px solid #f1dfb7', flex: 1.2 }}
             >
               Enquire Product
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="22" y1="2" x2="11" y2="13"></line>
                 <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
               </svg>
-            </button>
+            </Link>
             <button
               className="btn-share"
+              onClick={handleShare}
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', height: '48px', fontSize: '16px', fontWeight: 500, cursor: 'pointer', borderRadius: '4px', transition: 'all 0.3s ease', backgroundColor: 'transparent', color: '#f1dfb7', border: '1px solid #f1dfb7', flex: 1 }}
             >
-              Share
+              {shareText}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="18" cy="5" r="3"></circle>
                 <circle cx="6" cy="12" r="3"></circle>
@@ -247,8 +264,9 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
 const SingleCollection = () => {
   const { id } = useParams();
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const categoryParam = searchParams.get('category');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParamsObj = new URLSearchParams(location.search);
+  const categoryParam = searchParamsObj.get('category');
 
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -327,6 +345,27 @@ const SingleCollection = () => {
   }, [id, categoryParam, collectionName]);
 
   useEffect(() => {
+    // Deep-linking: Look for product ID in URL
+    const productId = searchParams.get('product');
+    if (productId && productsData.products) {
+      const found = productsData.products.find(p => p.id === productId);
+      if (found) setSelectedProduct(found);
+    } else {
+      setSelectedProduct(null);
+    }
+  }, [searchParams, productsData.products]);
+
+  const handleOpenLightbox = (product) => {
+    setSearchParams({ product: product.id });
+  };
+
+  const handleCloseLightbox = () => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.delete('product');
+    setSearchParams(newParams);
+  };
+
+  useEffect(() => {
     if (selectedProduct) {
       document.body.style.overflow = 'hidden';
     } else {
@@ -361,7 +400,7 @@ const SingleCollection = () => {
               key={product.id}
               product={product}
               index={i}
-              onOpenLightbox={setSelectedProduct}
+              onOpenLightbox={handleOpenLightbox}
               getImagePath={getImagePath}
               targetCategoryName={targetCategoryName}
             />
@@ -420,7 +459,7 @@ const SingleCollection = () => {
       <Lightbox
         product={selectedProduct}
         isOpen={!!selectedProduct}
-        onClose={() => setSelectedProduct(null)}
+        onClose={handleCloseLightbox}
         getImagePath={getImagePath}
       />
     </div>

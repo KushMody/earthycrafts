@@ -24,10 +24,28 @@
       transform: translateX(100%) skewX(-15deg);
     }
   }
+
+  @keyframes breath {
+
+    0%,
+    100% {
+      transform: translateY(0);
+      opacity: 0.6;
+    }
+
+    50% {
+      transform: translateY(15px);
+      opacity: 1;
+    }
+  }
 }
 
 .cursor-blink {
   animation: blink 0.8s step-end infinite;
+}
+
+.animate-breath {
+  animation: breath 1.5s cubic-bezier(0.445, 0.05, 0.55, 0.95) infinite;
 }
 
 @theme {

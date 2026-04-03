@@ -206,12 +206,12 @@ const About = () => {
                             <div>
                                 <p className="uppercase text-[#c29d59] tracking-[0.35em] text-[10px] md:text-xs font-semibold mb-2">{modalContent[activeModal].subtitle || 'Narrative'}</p>
                                 <h3 className="text-[#efe7d2] font-['Forum',serif] text-3xl md:text-5xl leading-[1.05] uppercase tracking-tight">{modalContent[activeModal].title}</h3>
-                                <p className="mt-3 text-[#f0e9d8] text-sm md:text-base leading-relaxed opacity-90">{modalContent[activeModal].subContent}</p>
+                                <p className="mt-4 text-[#efe7d2] font-['Forum',serif] text-base md:text-xl leading-relaxed opacity-80">{modalContent[activeModal].subContent}</p>
                             </div>
 
-                            <div className="border-t border-white/10 pt-4">
-                                <p className="text-[#efe7d2] text-base md:text-lg leading-relaxed">{modalContent[activeModal].content}</p>
-                                <div className="mt-4 text-[#e8d8a4] text-xl md:text-2xl italic font-semibold leading-snug">{modalContent[activeModal].quote}</div>
+                            <div className="border-t border-white/10 pt-6">
+                                <p className="text-[#efe7d2] font-['Forum',serif] text-base md:text-xl leading-relaxed opacity-80">{modalContent[activeModal].content}</p>
+                                <div className="mt-6 text-[#c29d59] font-['Forum',serif] font-normal text-xl md:text-3xl italic opacity-90 leading-snug">{modalContent[activeModal].quote}</div>
                             </div>
                         </div>
                     </div>
