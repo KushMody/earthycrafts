@@ -124,8 +124,8 @@ const Contact = () => {
       {/* Right Side - Form */}
       <div className="w-full md:w-[50vw] lg:w-[50vw] h-auto md:h-full flex flex-col items-center justify-center p-4 md:p-8 lg:p-10 bg-[#0c0c0c] md:overflow-y-auto custom-scrollbar font-['Forum',serif]">
         <div className="w-full max-w-xl editorial-reveal" style={{ transitionDelay: '200ms' }}>
-          <div className="text-center mb-8 editorial-reveal" style={{ transitionDelay: '300ms' }}>
-            <div className="flex items-center justify-center space-x-4 mb-4">
+          <div className="text-center mb-6 editorial-reveal" style={{ transitionDelay: '300ms' }}>
+            <div className="flex items-center justify-center space-x-4 mb-3">
               <div className="h-[1px] w-12 bg-[#efe7d2]/40"></div>
               <h2 className="text-[#efe7d2] font-['Forum',serif] text-2xl md:text-3xl tracking-[0.2em] uppercase font-normal">
                 CONTACT US
@@ -137,7 +137,7 @@ const Contact = () => {
             </p>
           </div>
 
-          <form className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4" onSubmit={handleSubmit}>
+          <form className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3" onSubmit={handleSubmit}>
             {/* Name */}
             <div className="flex flex-col space-y-1.5 editorial-reveal" style={{ transitionDelay: '400ms' }}>
               <label className="text-[#efe7d2]/80 text-[10px] tracking-[0.2em] font-['Forum',serif] uppercase">Name <span className="text-red-500">*</span></label>
@@ -241,10 +241,10 @@ const Contact = () => {
               </button>
 
               {status === 'success' && (
-                <p className="text-[#c29d59] text-center mt-4 text-sm animate-pulse">Thank you! We will get back to you shortly.</p>
+                <p className="text-[#c29d59] text-center mt-2.5 text-sm animate-pulse font-normal">Thank you! We will get back to you shortly.</p>
               )}
               {status === 'error' && (
-                <div className="text-red-500 text-center mt-4 text-xs space-y-1">
+                <div className="text-red-500 text-center mt-2.5 text-xs space-y-1">
                   <p>Oops! Something went wrong.</p>
                   <p className="font-bold text-[10px] uppercase tracking-wider">{errorMessage}</p>
                   <p className="opacity-70 text-[10px]">Note: Ensure your local backend (npm run backend) is running to test emails locally.</p>
