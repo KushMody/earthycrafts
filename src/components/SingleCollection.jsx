@@ -214,7 +214,7 @@ const Lightbox = ({ product, isOpen, onClose, getImagePath }) => {
             {product.name}
           </h2>
           <p style={{ color: '#f1dfb7', lineHeight: 1.6, fontSize: 'clamp(0.9rem, 1.5vw, 1rem)', fontStyle: 'italic', borderLeft: '2px solid #f1dfb7', paddingLeft: '1.25rem' }}>
-            Exquisite hand-painted pottery featuring traditional cobalt pigments and a signature glaze that captures the essence of heritage craftsmanship.
+            {product.description || "Exquisite hand-painted pottery featuring traditional cobalt pigments and a signature glaze that captures the essence of heritage craftsmanship."}
           </p>
 
           {product.dimensions && (

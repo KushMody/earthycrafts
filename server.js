@@ -18,7 +18,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 // Handle the contact form submission (FormData)
 app.post("/api/send-email", async (req, res) => {
   const form = formidable({});
-  
+
   form.parse(req, async (err, fields, files) => {
     if (err) {
       console.error("Formidable Parse Error:", err);
@@ -70,6 +70,7 @@ app.post("/api/send-email", async (req, res) => {
         html: htmlContent,
         attachments,
       });
+      
 
       if (error) {
         console.error("Resend API Error:", error);
